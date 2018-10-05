@@ -1,29 +1,29 @@
 
 ## Advanced HCI Fedex Project 
-=============================
+
 Make sure you have anaconda installed.
 
-Create an new environment in anaconda 
+1. Create an new environment in anaconda 
     > conda create --name adv-hci python=3.6`
 
-Activate environment:
+2. Activate environment:
     > `source activate flask-test`
 
-Make sure you are in the correct directory.
+3. Make sure you are in the correct directory.
 from directory : ../HCI_FedEx
 
-Run setup to install dependencies: 
+4 . Run setup to install dependencies: 
     > `python setup.py install`
 
-Verify flask and other dependencies were installed
+5. Verify flask and other dependencies were installed
     > `conda list`
 
-To run app: 
+6. To run app: 
     `export FLASK_APP=FlaskApp`
     `export FLASK_ENV=development`
 
-Initialize the database:
+7. Initialize the database:
     > `flask init-db`
 
-Run on local host and open in browser:
+8. Run on local host and open in browser:
     > `flask run`
