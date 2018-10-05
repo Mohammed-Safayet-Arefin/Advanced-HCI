@@ -1,5 +1,4 @@
-
-## Advanced HCI Fedex Project 
+# Advanced-HCI
 =============================
 Make sure you have anaconda installed.
 
@@ -27,3 +26,6 @@ Initialize the database:
 
 Run on local host and open in browser:
     > `flask run`
+=======
+# Advanced-HCI
+>>>>>>> bda0fbca39e73d9159d1c860bbaa9697b6092dc7
