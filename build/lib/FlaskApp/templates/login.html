@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <!-- <h1>{% block title %}Log In{% endblock %}</h1> -->
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<div class='login-body text-center'>
+   <form method="post" class="form-login">
+      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <label for="username" class="sr-only">Username</label>
+      <input name="username" id="username"  class='form-control' placeholder="Username" required autofocus>
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" name="password" id="password" class='form-control' placeholder='Password'required>
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+      <p class="mt-5 mb-3 text-muted">Flexible Worker &copy; 2018</p>
+    </form>
+</div>
+      
+{% endblock %}
