@@ -1,6 +1,5 @@
-
-## Advanced HCI Fedex Project 
-
+# Advanced-HCI
+=============================
 Make sure you have anaconda installed.
 
 1. Create an new environment in anaconda 
