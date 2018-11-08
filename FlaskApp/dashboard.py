@@ -14,10 +14,11 @@ def index():
     db = get_db()
 
     # insert dummy data.
-    db.execute('INSERT INTO job (job_title, job_desc, author_id)'
-                ' VALUES (?, ?, ?)',
-                ("Title", "description", 1)
-            )
+    # db.execute('INSERT INTO job (job_title, job_desc, author_id)'
+    #             ' VALUES (?, ?, ?)',
+    #             ("Title", "description", 1)
+    #         )
+    
     jobs = db.execute(
         'SELECT j.id, job_title, job_desc, created, author_id, username'
         ' FROM job j JOIN user u ON j.author_id = u.id'

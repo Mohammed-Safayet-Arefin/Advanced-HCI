@@ -11,7 +11,6 @@ Make sure you have anaconda installed.
 2. Activate environment:
     > `source activate adv-hci`
 
-
 3. navigate to the correct directory:
     > from directory : ../HCI_FedEx
 
@@ -25,8 +24,8 @@ Make sure you have anaconda installed.
 
 
 6. To run app: 
-    `export FLASK_APP=FlaskApp`
-    `export FLASK_ENV=development`
+    > `export FLASK_APP=FlaskApp`
+    >  `export FLASK_ENV=development`
 
 
 7. Initialize the database:
