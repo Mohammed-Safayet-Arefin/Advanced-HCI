@@ -46,10 +46,18 @@ def login():
         password = request.form['password']
         db = get_db()
         error = None
+        isManager = False
 
         user = db.execute(
             'SELECT * FROM user WHERE username = ?', (username,)
         ).fetchone()
+
+        # if user == None:
+        #     user = db.execute(
+        #     'SELECT * FROM manager WHERE username = ?', (username,)
+        # ).fetchone()
+              # if manager not None:
+              #   isManager == True;
 
         if user is None:
             error = 'Incorrect username.'

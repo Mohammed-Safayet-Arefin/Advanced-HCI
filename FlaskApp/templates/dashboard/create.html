@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Job{% endblock %}</h1>
+  <!-- <link href="dashboard.css" rel="stylesheet"> -->
+  <link href="{{ url_for('static', filename='css/create.css') }}" rel="stylesheet">
+  <!-- <h1>{% block title %}Jobs{% endblock %}</h1> -->
+  <!-- {% if g.user %}
+    <a class="action" href="{{ url_for('dashboard.create') }}">New</a>
+  {% endif %} -->
 {% endblock %}
 
 {% block content %}
