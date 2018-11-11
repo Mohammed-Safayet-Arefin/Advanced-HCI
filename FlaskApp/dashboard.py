@@ -55,6 +55,17 @@ def create():
     return render_template('dashboard/create.html')
 
 
+####################################################################################
+@bp.route('/profile', methods=('GET', 'POST'))
+@login_required
+def profile():
+    # if request.method == 'POST':
+        # return redirect(url_for('dashboard.index'))
+
+    return render_template('dashboard/profile.html')
+####################################################################################
+
+
 def get_job(id, check_author=True):
     job = get_db().execute(
         'SELECT j.id, job_title, job_desc, created, author_id, username'
