@@ -37,4 +37,4 @@ Make sure you have anaconda installed.
     
 
 Push repository to dev branch 
-    > git push -u origin dev1.0
+    > git push -u origin dev1.0   - to push canges to remote branch 
