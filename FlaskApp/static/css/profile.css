@@ -7,6 +7,9 @@
 	width: 200px;
 }
 
+/*#heading{
+	margin-top: 2em;
+}*/
 
 table {
     /*border-collapse: collapse;*/
@@ -25,8 +28,6 @@ table {
 #qualificationsTable {
 	margin-bottom: 3em;
 }
-
-
 
 
 /* ============================================= */

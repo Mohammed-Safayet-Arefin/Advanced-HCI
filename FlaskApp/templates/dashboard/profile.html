@@ -3,7 +3,9 @@
 {% block header %}
 
   	<h1>{% block title %}Profile{% endblock %}</h1>
+  	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
   	<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+
 
     <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
 	<!--     <script src="/static/js/bootstrap.js"></script>
@@ -21,140 +23,140 @@
 
 
 
-<div class="panel panel-info">
 
-	<div class="panel-body">
-
-		<div class = "row">
+<!-- 		<div class = "row">
 			<div class="col-md-3 col-lg-3" align="center">  </div>
 
 			 <div class="col-md-6 col-lg-6" align = "center"> 
-			 	<!-- <div class="media"> -->
 					<img id= "profilePic" class="mr-3" src="{{ url_for('static', filename='images/profileIcon.png') }}", alt="Generic placeholder image">
 					
-					<!-- <div class="media-body"> -->
 						<h4 class="mt-0">{{ g.user['username'] }}</h4>
-					<!-- </div> -->
-			 	<!-- </div> -->
 			</div>
-		</div>
+		</div> -->
 
-		<div class="row">
+		<div class="container-fluid" align="center">
 	    
-	    	<div class="col-md-3 col-lg-3 " align="center">  </div>
+	    		<div class="col-md-6" align="center">  
+
+	    			<img id= "profilePic" class="mr-3" src="{{ url_for('static', filename='images/profileIcon.png') }}", alt="Generic placeholder image">
+					
+						<h4 class="mt-0">{{ g.user['username'] }}</h4>
+
+	    		</div>
 		    	    
-		    <div class=" col-md-6 col-lg-6 "> 
+			    <div class=" col-md-6"> 
 
-		      <table id = "userInfoTable" class="table table-user-information">
-		        <tbody>
+			      <div id = "userInfoTable" class="table table-user-information">
+			      		<div class="row" >
+			      			<div class="col-6"><h5  style = "margin-top: 2em;" class="float-left">PERSONAL INFORMATION</h5></div>
+			      			<div class="col-6"><button id="editButton" href="#" type="button" class="btn btn-outline-secondary float-right" data-toggle="modal" data-target="#modalContactForm"> Edit</button></div>
+			      		</div>
+			      		<hr>
 
-		          <tr>
-		            <td> <b> PERSONAL INFORMATION </b></td>
-		            <td> <a id="editButton" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalContactForm"> Edit</a> </td>
-
-		            <!-- MODAL CONTAINING FORM -->
-					<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-					  aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header text-center">
-					        <h4 class="modal-title w-100 font-weight-bold"> Edit your information below: </h4>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-							<div class="form-group row">
-								<div class="col-3">
-									<label for="nameInput" class="col-2 col-form-label">Name: </label>
-								</div>
-							  	<div class="col-9">
-							    	<input class="form-control" type="text" value="Joe David" id="nameInput">
-							  	</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-3">
-							 		<label for="usernameInput" class="col-2 col-form-label">Username: </label>
-							 	</div>
-							    <div class="col-9">
-							    	<input class="form-control" type="text" value="{{ g.user['username'] }}" id="usernameInput">
+				            <!-- MODAL CONTAINING FORM -->
+							<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+							  aria-hidden="true">
+							  <div class="modal-dialog" role="document">
+							    <div class="modal-content">
+							      <div class="modal-header text-center">
+							        <h4 class="modal-title w-100 font-weight-bold"> Edit your information below: </h4>
+							        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							          <span aria-hidden="true">&times;</span>
+							        </button>
+							      </div>
+							      <div class="modal-body">
+									<div class="form-group row">
+										<div class="col-3">
+											<label for="nameInput" class="col-2 col-form-label">Name: </label>
+										</div>
+									  	<div class="col-9">
+									    	<input class="form-control" type="text" value="Joe David" id="nameInput">
+									  	</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-3">
+									 		<label for="usernameInput" class="col-2 col-form-label">Username: </label>
+									 	</div>
+									    <div class="col-9">
+									    	<input class="form-control" type="text" value="{{ g.user['username'] }}" id="usernameInput">
+									    </div>
+									</div>
+									<div class="form-group row">
+										<div class="col-3">
+									  		<label for="emailInput" class="col-2 col-form-label">Email: </label>
+									  	</div>
+									  	<div class="col-9">
+									    	<input class="form-control" type="email" value="joedavid@example.com" id="emailInput">
+									 	 </div>
+									</div>
+									<div class="form-group row">
+										<div class="col-3">
+											<label for="genderInput" class="col-2 col-form-label">Gender: </label>
+										</div>
+									  	<div class="col-9">
+									    	<!-- <input class="form-control" type="text" value="Masculine" id="genderInput"> -->
+									    	<!-- Select Basic -->
+											    <select id="selectbasic" name="selectbasic" class="form-control">
+											      <option value="1"> Men </option>
+											      <option value="2"> Woman </option>
+											    </select>
+									  	</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-3">
+									  		<label for="addressInput" class="col-2 col-form-label">Address: </label>
+									  	</div>
+									  <div class="col-9">
+									    <input class="form-control" type="text" value="Starkville, MS" id="addressInput">
+									  </div>
+									</div>
+							      </div>
+							      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
+								  </div>
 							    </div>
-							</div>
-							<div class="form-group row">
-								<div class="col-3">
-							  		<label for="emailInput" class="col-2 col-form-label">Email: </label>
-							  	</div>
-							  	<div class="col-9">
-							    	<input class="form-control" type="email" value="joedavid@example.com" id="emailInput">
-							 	 </div>
-							</div>
-							<div class="form-group row">
-								<div class="col-3">
-									<label for="genderInput" class="col-2 col-form-label">Gender: </label>
-								</div>
-							  	<div class="col-9">
-							    	<!-- <input class="form-control" type="text" value="Masculine" id="genderInput"> -->
-							    	<!-- Select Basic -->
-									    <select id="selectbasic" name="selectbasic" class="form-control">
-									      <option value="1"> Men </option>
-									      <option value="2"> Woman </option>
-									    </select>
-							  	</div>
-							</div>
-							<div class="form-group row">
-								<div class="col-3">
-							  		<label for="addressInput" class="col-2 col-form-label">Address: </label>
-							  	</div>
-							  <div class="col-9">
-							    <input class="form-control" type="text" value="Starkville, MS" id="addressInput">
 							  </div>
 							</div>
-					      </div>
-					      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-dismiss="modal">Save</button>
-						  </div>
-					    </div>
-					  </div>
+
+
+						<div class="row" >
+							<div class="col-6"><p class = "float-left">Name:</div>
+							<div class="col-6"> <p class="float-right">Joe David</p></div>
+						</div>
+						<hr>
+
+						<div class="row" >
+							<div class="col-6"><p class = "float-left">Username:</div>
+							<div class="col-6"> <p class="float-right">{{ g.user['username'] }}</p></div>
+						</div>
+						<hr>
+
+						<div class="row" >
+							<div class="col-6"><p class = "float-left">Age:</div>
+							<div class="col-6"> <p class="float-right">20</p></div>
+						</div>
+						<hr>
+
+						<div class="row" >
+							<div class="col-6"><p class = "float-left">Gender:</div>
+							<div class="col-6"> <p class="float-right">Men</p></div>
+						</div>
+						<hr>
+
+						<div class="row" >
+							<div class="col-6"><p class = "float-left">Address:</p></div>
+							<div class="col-6"> <p class="float-right">Starkville, MS</p></div>
+						</div>
+						<hr>
 					</div>
 
-		          </tr>
+		          <div class="row">
 
-		          <tr>
-		            <td>Name:</td>
-		            <td>Joe David</td>
-		          </tr>
-
-		          <tr>
-		            <td>Username:</td>
-		            <td> {{ g.user['username'] }}</td>
-		          </tr>
-
-		          <tr>
-		            <td>Age:</td>
-		            <td>20</td>
-		          </tr>
-		       
-		          <tr>
-		            <td>Gender:</td>
-		            <td>Men</td>
-		          </tr>
-
-		          <tr>
-		            <td>Address:</td>
-		            <td>Starkville, MS</td>
-		          </tr>
-
-		        </tbody>
-		      </table>
-
-		      <table id = "qualificationsTable" class="table table-user-information">
-		        <tbody>
-
-		          <tr>
-		            <td> <b> QUALIFICATIONS </b> </td>
-		            <td> <a id="recommendationsButton" href="#" class="btn btn-primary" data-toggle="modal" data-target="#recsModal">Recommendations</a> </td>
+		            <div class="col-6"><h5  style = "margin-top: 2em;" class="float-left">QUALIFICATIONS</h5></div>
+		            <div class="col-6"> <button href="#" type="button" class="btn btn-outline-secondary float-right" data-toggle="modal" data-target="#recsModal">Recommendations</button> 
+		            </div>
 			            <!-- Modal -->
-						<div class="modal fade" id="recsModal" tabindex="-1" role="dialog" aria-labelledby="recsModalLabel" aria-hidden="true">
+						<div class="modal fade " id="recsModal" tabindex="-1" role="dialog" aria-labelledby="recsModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -173,16 +175,20 @@
 						    </div>
 						  </div>
 						</div>
-		          </tr>
+		          </div>
+		          <hr>
 
-		          <tr>
-		            <td> <a href = "#" data-toggle="modal" data-target="#q1Modal" > Q1 </a> </td>
+		          <div class="row">
+		            <div class="col-3"> 
+		            	<button class="float-left btn btn-sm btn-dark btn-dark qualification-tags" href = "#" data-toggle="modal" data-target="#q1Modal" > CDL License </button> 
+		            </div>
+		            <!-- </div> -->
 			            <!-- Modal -->
 						<div class="modal fade" id="q1Modal" tabindex="-1" role="dialog" aria-labelledby="q1ModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="q1ModalLabel">Q1: Qualification Name</h5>
+						        <h5 class="modal-title" id="q1ModalLabel">CDL License</h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
@@ -197,13 +203,17 @@
 						  </div>
 						</div>
 
-		            <td> <a href="#" data-toggle="modal" data-target="#q2Modal" > Q2 </a> </td>
+					<div class="col-3"> 
+		             <!-- <div class = "col-6"> -->
+		              <button class="btn btn-sm btn-dark btn-dark qualification-tags" href="#" data-toggle="modal" data-target="#q2Modal"> Fondler</button> 
+		             </div>
+		          <!-- </div> -->
 			            <!-- Modal -->
 						<div class="modal fade" id="q2Modal" tabindex="-1" role="dialog" aria-labelledby="q2ModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="q2ModalLabel">Q2: Qualification Name</h5>
+						        <h5 class="modal-title" id="q2ModalLabel">Fondler</h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
@@ -217,16 +227,21 @@
 						    </div>
 						  </div>
 						</div>
-		          </tr>
+					<!-- </div> -->
+					<!-- <hr> -->
 
-		          <tr>
-		            <td> <a href="#" data-toggle="modal" data-target="#q3Modal"  > Q3 </a> </td>
+		           <!-- <div class="row"> -->
+		            <!-- <div class="col-6">  -->
+		            <div class="col-3"> 
+		            	<button class = "btn btn-sm btn-dark btn-dark qualification-tags" href="#" data-toggle="modal" data-target="#q3Modal"> Shipping </button> 
+		            </div>
+		            <!-- </div> -->
 			            <!-- Modal -->
 						<div class="modal fade" id="q3Modal" tabindex="-1" role="dialog" aria-labelledby="q3ModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="q3ModalLabel">Q3: Qualification Name</h5>
+						        <h5 class="modal-title" id="q3ModalLabel">Shipping</h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
@@ -241,13 +256,17 @@
 						  </div>
 						</div>
 
-		            <td> <a href="#" data-toggle="modal" data-target="#q4Modal"  > Q4 </a> </td>
+		            <!-- <div class="col-6"> -->
+		            <div class="col-3"> 
+		             <button class="float-right btn btn-sm btn-dark btn-dark qualification-tags" href="#" data-toggle="modal" data-target="#q4Modal"> Packing </button> 
+		         	</div>
+		         <!-- </div> -->
 			            <!-- Modal -->
 						<div class="modal fade" id="q4Modal" tabindex="-1" role="dialog" aria-labelledby="q4ModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="q4ModalLabel">Q4: Qualification Name</h5>
+						        <h5 class="modal-title" id="q4ModalLabel">Packing</h5>
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
 						        </button>
@@ -261,126 +280,76 @@
 						    </div>
 						  </div>
 						</div>
-		          </tr>
+		          </div>
+		      	<!-- </div> -->
+		          <hr>
 		
-		        </tbody>
-		      </table>
 
-		      <table id = "settingsTable" class="table table-user-information">
-		        <tbody>
 
-		          <tr>
-		            <td> <b> SETTINGS </b> </td>
-		            <td></td>
-		          </tr>
+		      	<div class = "row">
+			     	<div class="col-6"><h5  style = "margin-top: 2em;" class="float-left">SETTINGS</h5></div>
+			     	<div class="col-6"></div>
+			     </div>
+			     <hr>
 
-		          <tr>
-		            <td> Color Scheme </td>
-		            <td>
-		            	<!-- Select Basic -->
-						<!-- <div class="form-group">
-						    <select id="selectbasic" name="selectbasic" class="form-control">
-						      <option value="1">Light </option>
-						      <option value="2">Dark </option>
-						    </select>
-						</div>  -->	
-						<div class="btn-group" role="group" aria-label="Basic example">
-						  <button type="button" class="btn btn-secondary">Light</button>
+
+			     <div class = "row">
+			     	<div class="col-6"><p class = "float-left">Color Scheme</p></div>
+			     	<div class="col-6">
+			     		<div class="btn-group float-right" role="group" aria-label="Basic example">
+						  <button type="button" class="btn btn-secondary" disabled>Light</button>
 						  <button type="button" class="btn btn-secondary">Dark</button>
 						</div>
-		            </td>
-		          </tr>
+			     	</div>
+			     </div>
+			     <hr>
 
-		          <tr>
-		            <td> Alerts </td>
-		            <td>
-		            	<!-- Rounded switch -->
-		            	<!-- https://stackoverflow.com/questions/39846282/how-to-add-the-text-on-and-off-to-toggle-button -->
-						<label class="switch">
-							<input type="checkbox">
-							<div class="slider round float-left"></div>
-						</label>
-		            </td>
-		          </tr>
-
-		          <!-- if on, frequency -->
-<!-- 		          <tr id="alertsNotificationsOptions">
-		            <td> Frequency </td>
-		            <td>
-  							<label><input type="radio" name="frequency" checked>Hourly</label>
-  							<label><input type="radio" name="frequency">Weekly</label>
-		            </td>
-		          </tr> -->
-
-		          <tr>
-		            <td> Email Notifications </td>
-		            <td>
-		            	<!-- Rounded switch -->
-		            	<!-- https://stackoverflow.com/questions/39846282/how-to-add-the-text-on-and-off-to-toggle-button -->
-						<label class="switch">
+				 <div class = "row">
+			     	<div class="col-6"><p class = "float-left">Alerts</p></div>
+			     	<div class="col-6">
+			     		<label class="switch float-right">
 							<input type="checkbox">
 							<div class="slider round"></div>
 						</label>
-		            </td>
-		          </tr>
-
-		
-				<!-- need to add button to save settings if changes were made - ?? -->
+			     	</div>
+			     </div>
+			     <hr>
 
 
-<!-- 		   	  <table id = "othersTable" class="table table-user-information">
-		        <tbody> 
+			    <div class = "row">
+			     	<div class="col-6"><p class="float-left">Email Notifications</p></div>
+			     	<div class="col-6">
+			     		<label class="switch float-right">
+							<input type="checkbox">
+							<div class="slider round"></div>
+						</label>
+			     	</div>
+			     </div>
+			     <hr>
 
-		          <tr id="emailNotificationsOptions">
-		            <td> Frequency </td>
-		            <td>
-						<div class="btn-group" role="group" aria-label="Basic example">
-						  <button type="button" class="btn btn-secondary">Hourly</button>
-						  <button type="button" class="btn btn-secondary">Weekly</button>
-						</div>
-		            </td>
-		          </tr>
+			     <div class="row">
+			     	<div class="col-6"><h5  style = "margin-top: 2em;" class="float-left">OTHERS</h5></div>
+			     	<div class="col-6"></div>
+			     </div>
+			     <hr>
 
-		        </tbody>
-		     </table> -->
-
-
-
-		   	  <table id = "othersTable" class="table table-user-information">
-		        <tbody>
-
-		          <tr>
-		            <td> <b> OTHERS </b></td>
-		            <td></td>
-		          </tr>
-
-		          <tr>
-		            <td> View Past Jobs </td>
-		            <td> 
-						<div id="reportRange">
+			     <div class = "row"">
+			     	<div class="col-4"><p class = "float-left">View Past Jobs</p></div>
+			     	<div class="col-8">
+			     		<div class="float-right" id="reportRange">
 						    <span data-feather="calendar"></span>
 						    <span></span>  <span data-feather="arrow-down-circle"></span>
 						</div>
-		            </td>
-		          </tr>
-
-		          <tr>
-		            <td> Schedule Vacations </td>
-		            <td>  ### </td>
-		          </tr>
-
-		          <tr>
-		            <td> Request Time Off </td>
-		            <td> ### </td>
-		          </tr>
-
-				  <tr>
-		            <td> View W2 </td>
-		            <td> ### </td>
-		          </tr>
-
-		        </tbody>
-		     </table>
+			     	</div>
+			     </div>
+			     <hr>
+			     <div class="row">
+			     	<div class="col-4" align="left"><button class = "float-left btn btn-sm btn-dark btn-dark qualification-tags" href="#">Schedule Vacations</button></div>
+			     	<div class="col-4" align="center"><button class = "btn btn-sm btn-dark btn-dark qualification-tags" href="#">Request time off</a></div>
+			     	<div class="col-4" align="right"><button class = "float-right btn btn-sm btn-dark btn-dark qualification-tags" href="#">View W2 </a></div>
+			     </div>
+			     <hr>
+		     </div>
 
 		    </div>
 		</div>
