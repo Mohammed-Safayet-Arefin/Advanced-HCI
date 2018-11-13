@@ -34,3 +34,7 @@ Make sure you have anaconda installed.
 
 8. Run on local host and open in browser:
     > `flask run`
+    
+
+Push repository to dev branch 
+    > git push -u origin dev1.0   - to push canges to remote branch 

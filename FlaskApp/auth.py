@@ -12,29 +12,43 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
+        db = get_db()
+
+        u_id = request.form['u_id']
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
         error = None
 
-        if not username:
-            error = "Username is required."
-        elif not password:
-            error = "Password is required."
-        elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
-        ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(username)
+        if not username or not password or not u_id:
+            error = "Please provide valid information"
+            flash(error)
+        elif (db.execute('SELECT * FROM Manager WHERE m_username = ?', (username,)).fetchone()) is not error:
+            error = "Username is already taken"
+            flash(error)
+        elif (db.execute('SELECT * FROM Employee WHERE e_username = ?', (username,)).fetchone()) is not error:
+            error = "Username is already taken"
+            flash(error)
 
         if error is None:
             db.execute(
-                'INSERT INTO user (username, password) VALUES (? , ?)',
-                (username, generate_password_hash(password))
+                'INSERT INTO Employee (e_id, e_username, e_password) VALUES (?, ? , ?)',
+                (u_id, username, generate_password_hash(password))
             )
             db.commit()
             return redirect(url_for('auth.login'))
 
-        flash(error)
+        # check = None
+        # if error is None:
+        #     if (db.execute('SELECT * FROM Manager WHERE m_id = ?', (u_id,)).fetchone()) is not check:
+        #         db.execute('''UPDATE Manager SET m_username = ?, m_password = ? WHERE m_id = ?''',
+        #                    (username, generate_password_hash(password), u_id))
+
+        #     else:
+        #         db.execute('''UPDATE Employee SET e_username = ?, e_password = ? WHERE e_id = ?''',
+        #                    (username, generate_password_hash(password), u_id))
+
+        #     db.commit()
+        #     return redirect(url_for('auth.login'))
 
     return render_template('register.html')
 
@@ -42,32 +56,56 @@ def register():
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
+        db = get_db()
+
         username = request.form['username']
         password = request.form['password']
-        db = get_db()
+
+        user_m_check = db.execute(
+            'SELECT * FROM Manager WHERE m_username = ?', (username,)).fetchone()
+        user_e_check = db.execute(
+            'SELECT * FROM Employee WHERE e_username = ?', (username,)).fetchone()
+
+        print("Manager: ", user_m_check)
+        print("Employee: ",  user_e_check)
+
         error = None
         isManager = False
+        u_id = None
 
-        user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
-        ).fetchone()
+        if user_m_check is not None:
+            user = user_m_check
+            u_id = user_m_check['m_id']
+            isManager = True
 
-        # if user == None:
-        #     user = db.execute(
-        #     'SELECT * FROM manager WHERE username = ?', (username,)
-        # ).fetchone()
-              # if manager not None:
-              #   isManager == True;
+        elif user_e_check is not None:
+            user = user_e_check
+            u_id = user_e_check['e_id']
+            isManager = False
 
-        if user is None:
+        elif user_m_check is None and user_e_check is None:
             error = 'Incorrect username.'
+
         elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
 
+
+        # if user is None:
+        #     error = 'Incorrect username.'
+        # elif not check_password_hash(user['password'], password):
+        #     error = 'Incorrect password.'
+
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            session['u_id'] = u_id
+            session['username'] = username
+            session['isManager'] = isManager
+            print("isManager:", isManager)
+
+            if isManager:
+                return redirect(url_for('dashboard.manager_dashboard'))
+            else:
+                return redirect(url_for('dashboard.index'))
 
         flash(error)
 
@@ -76,14 +114,27 @@ def login():
 
 @bp.before_app_request
 def load_logged_in_user():
-    user_id = session.get('user_id')
+    u_id = session.get('u_id')
+    username = session.get('username')
+    isManager = session.get('isManager')
+    print("u_id: ", u_id)
+    print("Username: ", username)
+    print("Manager: ", isManager)
 
-    if user_id is None:
+    if u_id is None:
         g.user = None
-    else:
+
+    elif isManager == False:
         g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
+            'SELECT * FROM Employee WHERE e_id = ?', (u_id,)
         ).fetchone()
+        print("Employee: ", g.user)
+
+    elif isManager == True:
+        g.user = get_db().execute(
+            'SELECT * FROM Manager WHERE m_id = ?', (u_id,)
+        ).fetchone()
+        print("Manager: ", g.user)
 
 
 @bp.route('/logout')
