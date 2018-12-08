@@ -83,11 +83,11 @@ body {
   left: 0px;
 }
 
-@media screen and (min-width: 768px) {
+/*@media screen and (min-width: 768px) {
   .page-wrapper.toggled .page-content {
     padding-left: 300px;
   }
-}
+}*/
 /*----------------show sidebar button----------------*/
 #show-sidebar {
   position: fixed;
@@ -160,7 +160,7 @@ body {
 /*--------------------sidebar-header----------------------*/
 
 .sidebar-wrapper .sidebar-header {
-  padding: 20px;
+  padding: 25px 20px 20px 20px;
   overflow: hidden;
 }
 
@@ -288,7 +288,7 @@ body {
 .sidebar-wrapper .sidebar-menu ul li a span.label,
 .sidebar-wrapper .sidebar-menu ul li a span.badge {
   float: right;
-  margin-top: 8px;
+  margin-top: 2px;
   margin-left: 5px;
 }
 
@@ -514,3 +514,9 @@ body {
 .chiller-theme .mCSB_scrollTools .mCSB_draggerRail {
     background-color: transparent;
 }
+
+
+@media only screen and (max-width: 1024px){
+  .page-wrapper {
+      display: none;
+  }

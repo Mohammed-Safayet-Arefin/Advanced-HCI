@@ -1,6 +1,12 @@
 
-h1, h2, h3, h4, h5, h6 {
-  color: #577F92;
+h4 {
+  font-size: 1.6em;
+  text-transform: uppercase;
+  color: #222;
+}
+
+a:hover{
+  text-decoration: none;
 }
 
 .btn a {color: #fff; }
@@ -11,6 +17,17 @@ h1, h2, h3, h4, h5, h6 {
 .claim-btn { width: 100%; }
 .edit-btn  { padding: .2rem .825rem; }
 .new-job a { color: #fff; }
+
+td > .btn-outline-primary{
+  color: #443453;
+  border-color: #443453;;
+}
+
+td > .btn-outline-primary:hover{
+    color: #fff;
+    background-color: #443453;
+    border-color: #443453;
+}
 
 .dashboard-body {
   font-size: .75rem;
@@ -43,6 +60,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 10px 10px 1.5em 10px;
     width: 50%;
 }
+
+.dropdown-menu a { color: #222; }
+
 
 #search-bar-dropdown {
     background: #443453;
@@ -157,12 +177,52 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5em;
 }
 
+
 /* Side Bar Metrics*/
-.metric {
+.metrics {
   margin: 15px 15px 15px 10px;
-  height: 140px;
-  width: 140px;
+  height: 135px;
+  width: 95%;
+  text-align: center;
+  font-size: 1.325em; 
+  font-weight: 600;
+  text-transform: uppercase;
 }
+
+.metrics-blue { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #577F92;
+  background-color: rgb(87,127,146,0.05);
+  color: #577F92;
+}
+.metrics-purple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #443453; 
+  background-color: rgb(68,52,83, 0.05);
+  color: #443453;
+}
+
+.metrics-blue:hover { 
+  background-color: rgb(87,127,146,0.2);
+}
+.metrics-purple:hover {
+  background-color: rgb(68,52,83, 0.2);
+}
+.metrics-nums {
+  font-size: 2em; 
+}
+
+
+/*Top Performers */
+.user-name a{
+  color: #fff;
+  font-size: 1.35em;
+}
+
 
 /*
  * Navbar

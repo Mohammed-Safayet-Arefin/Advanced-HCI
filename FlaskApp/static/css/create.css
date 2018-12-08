@@ -1,6 +1,11 @@
 
 /*All CSS styles for create job page */
 
+.new-job a, .btn a{
+  color: #fff;
+}
+
+
 .dashboard-body {
   font-size: .75rem;
   padding-top: .75rem;

@@ -50,6 +50,24 @@ CREATE TABLE Notification (
     created  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+
+CREATE TABLE Templates ( 
+    template_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    job_title TEXT NOT NULL, 
+    job_desc TEXT NOT NULL, 
+    job_credentials TEXT,
+    job_date_beg TEXT,
+    job_date_end TEXT,
+    job_time_beg TEXT,
+    job_time_end TEXT,
+    job_city TEXT,
+    job_state TEXT, 
+    job_zip INTEGER,
+    job_extra INTEGER,
+    job_days TEXT
+);
+
 -- Tables to implement
 -- jobsClaimed
 -- jobCreated
