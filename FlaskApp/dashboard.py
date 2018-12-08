@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 from FlaskApp.auth import login_required
 from FlaskApp.db import get_db
 
+
 bp = Blueprint('dashboard', __name__)
 
 # the dashboard will display all available jobs from the jobs database
@@ -51,8 +52,7 @@ def index():
 
     return render_template('dashboard/index.html', jobs=jobs, notifications=notifications)
 
-
-@bp.route('/manager_dashboard')
+@bp.route("/manager_dashboard")
 def manager_dashboard():
     db = get_db()
 
@@ -92,14 +92,35 @@ def manager_dashboard():
 def user_profile():
     return render_template('dashboard/profile.html')
 
+@bp.route('/employee_schedule')
+@login_required
+def user_schedule():
+    return render_template('dashboard/employee_schedule.html')
+
+def get_template(id):
+    template = get_db().execute(
+        'SELECT * FROM Templates WHERE template_id = ?',
+        (id,)
+    ).fetchone()
+
+    if template is None:
+        abort(404, "Template id {0} doesn't exist.".format(id))
+
+    return template
+
 
 @bp.route('/create', methods=('GET', 'POST'))
+# @bp.route('/<int:id>/create', methods=('GET', 'POST'))
 @login_required
-def create():
+def create(id=None):
+
+    db = get_db()
+    templates = db.execute( 'SELECT * FROM Templates T').fetchall()
+    
     if request.method == 'POST':
         title = request.form['job_title']
         body = request.form['job_desc']
-        job_credentials = request['job_credentials']
+        qualifications = request.form['job_credentials']
         begin_date = request.form['job_date_beg']
         end_date = request.form['job_date_beg']
         begin_time = request.form['job_time_beg']
@@ -128,15 +149,15 @@ def create():
             # g.user['u_id']
             db.execute(
                 'INSERT INTO Job (job_title, job_desc, job_credentials, job_date_beg, job_date_end, job_time_beg, job_time_end, job_city, job_state, job_zip, m_id)'
-                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (title, body, job_credentials, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1)
+                ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (title, body, qualifications, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1)
             )
-            print(title, body, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1)
+            print(title, body, qualifications, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1)
             db.commit()
             
-            return redirect(url_for('dashboard.index'))
+            return redirect(url_for('dashboard.manager_dashboard'))
 
-    return render_template('dashboard/create.html')
+    return render_template('dashboard/create.html', templates=templates)
 
 
 ####################################################################################
@@ -152,8 +173,7 @@ def profile():
 
 def get_job(id, check_author=True):
     job = get_db().execute(
-        'SELECT job_id, job_title, job_desc, created, m_id'
-        ' FROM Job WHERE job_id = ?',
+        'SELECT * FROM Job j WHERE job_id = ?',
         (id,)
     ).fetchone()
 
@@ -171,6 +191,11 @@ def get_job(id, check_author=True):
 @login_required
 def update(id):
     job = get_job(id)
+
+    print(job['job_id'])
+    print(job['job_desc'])
+    print(job['job_credentials'])
+
 
     if request.method == 'POST':
         title = request.form['job_title']
@@ -207,7 +232,7 @@ def update(id):
                 (title, body, qualifications, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1, id)
             )
             db.commit()
-            return redirect(url_for('dashboard.index'))
+            return redirect(url_for('dashboard.manager_dashboard'))
 
     return render_template('dashboard/update.html', job=job)
 

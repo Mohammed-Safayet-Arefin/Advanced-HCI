@@ -4,14 +4,19 @@
   <!-- <link href="dashboard.css" rel="stylesheet"> -->
   <link href="{{ url_for('static', filename='css/create.css') }}" rel="stylesheet">
    <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
   <!-- <h1>{% block title %}Jobs{% endblock %}</h1> -->
   <!-- {% if g.user %}
     <a class="action" href="{{ url_for('dashboard.create') }}">New</a>
   {% endif %} -->
+  <script type="text/javascript"> 
+
+   
+  </script>
 {% endblock %}
 
 {% block content %}
-
   <div class="container-fluid">
     <div class="dashboard-body">
       <div class="row">
@@ -24,7 +29,7 @@
             <div class="sidebar-content">
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
@@ -42,15 +47,14 @@
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
-                        <li class="header-menu">
-                            <span>Manager Tools</span>
-                        </li>
                         <li>
                            <a href="#">
                                 <span data-feather="inbox"></span>
                                 <span>Inbox</span>
                                 <span class="badge badge-pill badge-danger">New</span>
                             </a>
+                        </li>
+                        <li>
                             <a href="{{ url_for('dashboard.manager_dashboard') }}">
                                 <span data-feather="layout"></span>
                                 <span>Dashboard</span>
@@ -99,25 +103,27 @@
           </nav>
         </div>
 
-        <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+        <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-4">
 
-              <div class="col-md-10 col-lg-8 col-sm-12">  
+              <div class="col-md-12 col-lg-8 col-sm-12">  
               <form class="create_job_form" method="post">
 
                 <hr>
                 <div class="dropdown float-right">
-                  <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Use Template
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Template A</a>
-                    <a class="dropdown-item" href="#">Template B</a>
-                    <a class="dropdown-item" href="#">Template C</a>
-                  </div>
-                  <div class="float-right"><input class=" btn btn-sm btn-outline-info" type="submit" value="Save"></div>
+                      <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-info" type="button">Save</button>
+                      </div>
+                      <select class="custom-select" onchange="jobTemplate(event)" id="inputGroupSelect03">
+                        <option selected>Template</option>
+                        <option value="0">{{templates[0]['name']}}</option>
+                        <option value="1">{{templates[1]['name']}}</option>
+                        <option value="2">{{templates[2]['name']}}</option>
+                      </select>
+                     </div>
                 </div>
-    
-               
+                
+
                 <div class="form-group">
                 <label for="job_title">Job Title</label>
                 <small class="form-text text-muted">Name of the job to be created.</small>
@@ -178,15 +184,9 @@
 
 
                 <div class="form-row">
-                  <div class="form-group col-md-10 col-sm-10">
+                  <div class="form-group col-md-12 col-sm-12">
                     <label for="job_date_beg">Beginning Date</label>
                     <input class="form-control" type="date" id="job_date_beg" name="job_date_beg" aria-describedby="inputGroupAppend" value="{{ request.form['job_date_beg'] }}"/>
-                  </div>
-                  <div class="form-group col-md-2 col-sm-2 mb-2">
-                    <label for="cal-btn">Calendar</label>
-                     <button id="cal-btn" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal">
-                      <span data-feather="calendar"></span>
-                    </button>
                   </div>
               </div>
 
@@ -227,26 +227,11 @@
 
 
                 <div class="form-row">
-                  <div class="form-group col-md-10 col-sm-10">
+                  <div class="form-group col-md-12 col-sm-12">
                      <label for="job_date_end">Ending Date</label>
                   <input class="form-control" type="date" id="job_date_end" name="job_date_end" value="{{ request.form['job_date_end'] }}"/>
                   </div>
-                  <div class="form-group col-md-2 col-sm-2 mb-2">
-                    <label for="cal-btn">Calendar</label>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal2">
-                    <span data-feather="calendar"></span>
-                  </button>
-                  </div>
               </div>
-
-               <!--  <div class="form-group col-md-6" >
-                  <label for="job_date_end">Ending Date</label>
-                  <input class="form-control" type="date" id="job_date_end" name="job_date_end" />
-
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal2">
-                    <span data-feather="calendar"></span>
-                  </button>
-                </div> -->
 
                 <div class="modal" tabindex="-1" role="dialog" id="calendarModal2">
                   <div class="modal-dialog" role="document">
@@ -373,80 +358,41 @@
     $( "#datepicker" ).datepicker();
   } );
   </script> -->
+
   <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
+  <script>
+    feather.replace()
+  </script>
 
-  <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
   <script type="text/javascript">
-    YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
-    
-        // Create a new instance of calendar, placing it in
-        // #mycalendar container, setting its width to 340px,
-        // the flags for showing previous and next month's
-        // dates in available empty cells to true, and setting
-        // the date to today's date.
-        var calendar = new Y.Calendar({
-          contentBox: "#mycalendar",
-          width:'340px',
-          showPrevMonth: true,
-          showNextMonth: true,
-          date: new Date()}).render();
-    
-        // Get a reference to Y.DataType.Date
-        var dtdate = Y.DataType.Date;
-    
-        // Listen to calendar's selectionChange event.
-        calendar.on("selectionChange", function (ev) {
-    
-          // Get the date from the list of selected
-          // dates returned with the event (since only
-          // single selection is enabled by default,
-          // we expect there to be only one date)
-          var newDate = ev.newSelection[0];
-    
-          // Format the date and output it to a DOM
-          // element.
-          Y.one("#selecteddate").setHTML(dtdate.format(newDate));
-        });
-    
-    });
-    </script>
+     var templates = [
+      ['{{ templates[0]['name'] }}', '{{ templates[0]['job_title']}}', '{{ templates[0]['job_desc']}}', '{{ templates[0]['job_credentials']}}', '{{ templates[0]['job_city']}}', '{{ templates[0]['job_state']}}', '{{ templates[0]['job_zip']}}'],
+      ['{{ templates[1]['name'] }}', '{{ templates[1]['job_title']}}', '{{ templates[1]['job_desc']}}', '{{ templates[1]['job_credentials']}}', '{{ templates[1]['job_city']}}', '{{ templates[1]['job_state']}}', '{{ templates[1]['job_zip']}}'], 
+      ['{{ templates[2]['name'] }}', '{{ templates[2]['job_title']}}', '{{ templates[2]['job_desc']}}', '{{ templates[2]['job_credentials']}}', '{{ templates[2]['job_city']}}', '{{ templates[2]['job_state']}}', '{{ templates[2]['job_zip']}}'],
+    ]
 
-    <script type="text/javascript">
-    YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
     
-        // Create a new instance of calendar, placing it in
-        // #mycalendar container, setting its width to 340px,
-        // the flags for showing previous and next month's
-        // dates in available empty cells to true, and setting
-        // the date to today's date.
-        var calendar2 = new Y.Calendar({
-          contentBox: "#mycalendar2",
-          width:'340px',
-          showPrevMonth: true,
-          showNextMonth: true,
-          date: new Date()}).render();
-    
-        // Get a reference to Y.DataType.Date
-        var dtdate = Y.DataType.Date;
-    
-        // Listen to calendar's selectionChange event.
-        calendar2.on("selectionChange", function (ev) {
-    
-          // Get the date from the list of selected
-          // dates returned with the event (since only
-          // single selection is enabled by default,
-          // we expect there to be only one date)
-          var newDate = ev.newSelection[0];
-    
-          // Format the date and output it to a DOM
-          // element.
-          Y.one("#selecteddate2").setHTML(dtdate.format(newDate));
-        });
-    
-    });
-    </script>
+    function jobTemplate(e) {
+       t_id = e.target.value
+       console.log("ID:" + e.target.value)
 
+       t_name = templates[t_id][0]
+       job_title = document.getElementById("job_title")
+       job_desc = document.getElementById("job_desc")
+       job_credentials = document.getElementById("job_credentials")
+       job_city = document.getElementById("job_city")
+       job_state = document.getElementById("job_state")
+       job_zip = document.getElementById("job_zip")
+
+       job_title.value = templates[t_id][1]
+       job_desc.value = templates[t_id][2]
+       job_credentials.value = templates[t_id][3]
+       job_city.value = templates[t_id][4]
+       job_state.value = templates[t_id][5]
+       job_zip.value = templates[t_id][6]
+       
+    }
+
+
+  </script>
 {% endblock %}

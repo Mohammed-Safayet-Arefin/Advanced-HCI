@@ -40,7 +40,7 @@
               {% if g.user %}
               <div class="new-job">
                 <h6 class="d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
-                  <a class="action" href="{{ url_for('dashboard.create') }}"><span>Create New Job</span></a>
+                  <a class="action" href="{{ url_for('dashboard.create') }}"><span>Create Job</span></a>
                   <a class="d-flex align-items-center text-muted" href="#">
                   <span data-feather="plus-circle"></span> </a>
                 </h6>
@@ -50,27 +50,24 @@
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
-                        <li class="header-menu">
-                            <span>Manager Tools</span>
-                        </li>
                         <li>
                            <a href="#">
                                 <span data-feather="inbox"></span>
                                 <span>Inbox</span>
-                                <span class="badge badge-pill badge-danger">New</span>
+                                <span class="badge badge-pill badge-danger">7 New</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ url_for('dashboard.manager_dashboard') }}">
                                 <span data-feather="layout"></span>
                                 <span>Dashboard</span>
+                                <span class="badge badge-pill badge-primary">3</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <span data-feather="users"></span>
                                 <span>Employees</span>
-                                <span class="badge badge-pill badge-primary">3</span>
                             </a>
                         </li>
                         
@@ -79,39 +76,17 @@
                                 <span data-feather="bar-chart-2"></span>
                                 <span>Analytics</span>
                             </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Pie chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Line chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bar chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="https://www.google.com/maps">
                                  <span data-feather="map"></span>
                                 <span>Live Maps</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="https://www.google.com/calendar">
                                  <span data-feather="calendar"></span>
                                 <span>Calendar</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span data-feather="list"></span>
-                                <span>Schedule</span>
                             </a>
                         </li>
                         <li>
@@ -156,20 +131,28 @@
 
                <div class="row">
                 <div class="col-3"> 
-                  <img class="metric" src="{{ url_for('static', filename='images/metrics_hours.png') }}">
+                 
+                <div class="metrics metrics-purple">
+                  <p><span class="metrics-nums">88</span> <br> Jobs<br>In Progress</p>
                 </div>
-                <div class="col-3"> 
-                    <img class="metric" src="{{ url_for('static', filename='images/metrics_claimed.png') }}">
+              
                 </div>
-
-                
+                <div class="col-3">   
+                  <div class="metrics metrics-blue">
+                    <p><span class="metrics-nums">12</span><br>Jobs<br>Unclaimed</p>
+                  </div>                
+                </div>
 
                 <div class="col-3">
-                  <img class="metric" src="{{ url_for('static', filename='images/metrics_atten.png') }}">
+                  <div class="metrics metrics-purple">
+                    <p><span class="metrics-nums">99 %</span> <br> Attendance</p>
+                  </div>
                 </div>
 
                 <div class="col-3">
-                 <img class="metric" src="{{ url_for('static', filename='images/metrics_punc.png') }}">
+                  <div class="metrics metrics-blue">
+                    <p><span class="metrics-nums">98.3 %</span> <br> Puncuality</p>
+                  </div>
                 </div>
               </div>
               
@@ -196,17 +179,17 @@
                             <span id="search_concept">Filter by</span> <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="#Location">Location</a></li>
-                            <li><a href="#Day">Day of the Week</a></li>
-                            <li><a href="#Qualifications">Qualification</a></li>
-                            <li><a href="#Time">Time of Day</a></li>
+                            <li class="dropdown-item"><a href="#Location">Location</a></li>
+                            <li class="dropdown-item"><a href="#Day">Day of the Week</a></li>
+                            <li class="dropdown-item"><a href="#Qualifications">Qualification</a></li>
+                            <li class="dropdown-item"><a href="#Time">Time of Day</a></li>
                           </ul>
                       </div>
               </div>
               </div>
               <div class="col-lg-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3">
-                <button class="btn btn-sm btn-outline-secondary">
+                <button class="btn btn-block btn-sm btn-outline-secondary">
                 <span data-feather="filter"></span> Advanced Filter</button>
               </div>
               </div>
@@ -548,17 +531,20 @@
                     <div class="row">
 
                       <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}"" alt="User picture">
+                        <br>
                         <span class="user-name">Joe <br><strong> David</strong> </span>
                       </div>
 
                        <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}"alt="User picture">
+                        <br>
                         <span class="user-name">Jessie <br><strong> Smith</strong> </span>
                       </div>
 
                        <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Robert <br><strong> Downs</strong></span>
                       </div>
                       
@@ -567,17 +553,20 @@
                    <div class="row">
 
                       <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Alan <br><strong> Winters</strong> </span>
                       </div>
 
                        <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Dillan <br><strong>Graham </strong> </span>
                       </div>
 
                        <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Robert <br><strong> Downs</strong></span>
                       </div>
                       
@@ -587,17 +576,20 @@
                    <div class="row">
 
                       <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Alan <br><strong> Winters</strong> </span>
                       </div>
 
                        <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Dillan <br><strong>Graham </strong> </span>
                       </div>
 
                        <div class="col-4">
-                        <img class="img-responsive rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                        <br>
                         <span class="user-name">Robert <br><strong> Downs</strong></span>
                       </div>
                       
