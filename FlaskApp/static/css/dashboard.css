@@ -43,11 +43,11 @@ td > .btn-outline-primary:hover{
   width: 60px;
 } 
 
-.feather {
+/*.feather {
   width: 16px;
   height: 16px;
   vertical-align: text-bottom;
-}
+}*/
 
 .ico_help {
   margin: 5px 0px 10px 5px;
@@ -257,6 +257,8 @@ td > .btn-outline-primary:hover{
 
 .onlineIcon{
   fill: green;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .awardIcon{
@@ -298,21 +300,9 @@ td > .btn-outline-primary:hover{
 }
 
 /* unvisited link */
-a:link {
+/*.card-body a:link, 
+.card-body a:visited, 
+.card-body a:hover, 
+.card-body a:active {
   color: white;
-}
-
-/* visited link */
-a:visited {
-  color: white;
-}
-
-/* mouse over link */
-a:hover {
-  color: white;
-}
-
-/* selected link */
-a:active {
-  color: white;
-}
+}*/
