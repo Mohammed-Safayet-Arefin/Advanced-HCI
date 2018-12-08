@@ -1,8 +1,30 @@
+
+h1, h2, h3, h4, h5, h6 {
+  color: #577F92;
+}
+
+.btn a {color: #fff; }
+.btn a:hover {
+  color: #343a40;
+  text-decoration: none;
+}
+.claim-btn { width: 100%; }
+.edit-btn  { padding: .2rem .825rem; }
+.new-job a { color: #fff; }
+
 .dashboard-body {
   font-size: .75rem;
   padding-top: .75rem;
   padding-bottom: .75rem;
 }
+
+.table-sm td { padding: 0.8rem; }
+.avail-jobs  { font-size: 1.4em; }
+.avail-jobs-badge{ padding: 1em 1.5em; }
+
+.card-body img{
+  width: 60px;
+} 
 
 .feather {
   width: 16px;
@@ -10,9 +32,68 @@
   vertical-align: text-bottom;
 }
 
-/*
- * Sidebar
- */
+.ico_help {
+  margin: 5px 0px 10px 5px;
+  height: 24px;
+  width: 24px;
+}
+
+.search-text{ font-size: 1.6em; }
+.search-bar {
+    padding: 10px 10px 1.5em 10px;
+    width: 50%;
+}
+
+#search-bar-dropdown {
+    background: #443453;
+    color: #fff;
+    border-bottom-right-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#search-input{
+  margin-left: 10px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+
+ #map {
+    height: 250px;  /* The height is 400 pixels */
+    width: 100%;  /* The width is the width of the web page */
+ }
+
+ #map_placeholder{
+  height: 250px;
+  width: 100%;
+ }
+ #map_placeholder img{
+  width: 100%;
+  height: 250px;
+ }
+
+/*Job Dropdown*/
+.panel-body{
+  padding-left: 0.8em;
+}
+.panel-data{
+  padding-top: 1em;
+}
+
+.qualification-tags{
+    padding: .25rem .5rem;
+    margin-bottom: .25em;
+    font-size: .6rem;
+    line-height: 1.25;
+    border-radius: .2rem;
+}
+
+
+/*Schedule Styles */
+
+
+
 
 .sidebar {
   position: fixed;
@@ -72,6 +153,17 @@
   padding-top: 48px; /* Space for fixed navbar */
 }
 
+.notification{
+  margin-top: 1.5em;
+}
+
+/* Side Bar Metrics*/
+.metric {
+  margin: 15px 15px 15px 10px;
+  height: 140px;
+  width: 140px;
+}
+
 /*
  * Navbar
  */
@@ -100,3 +192,67 @@
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }*/
+
+
+
+.onlineIcon{
+  fill: green;
+}
+
+.awardIcon{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+
+/*NOTIFICATIONS*/
+
+.featherIcon {
+  width: 2.3em;
+  height: 2.3em;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: transparent;
+  margin-right: 7px;
+}
+
+.alert {
+  position: relative;
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
+/* For separation between the notifications cards */
+.card-text{
+  margin-top:-7px;
+}
+
+.text{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+
+}
+
+/* unvisited link */
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}

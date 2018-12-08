@@ -11,7 +11,6 @@ Make sure you have anaconda installed.
 2. Activate environment:
     > `source activate adv-hci`
 
-
 3. navigate to the correct directory:
     > from directory : ../HCI_FedEx
 
@@ -25,8 +24,8 @@ Make sure you have anaconda installed.
 
 
 6. To run app: 
-    `export FLASK_APP=FlaskApp`
-    `export FLASK_ENV=development`
+    > `export FLASK_APP=FlaskApp`
+    >  `export FLASK_ENV=development`
 
 
 7. Initialize the database:
@@ -35,3 +34,7 @@ Make sure you have anaconda installed.
 
 8. Run on local host and open in browser:
     > `flask run`
+    
+
+Push repository to dev branch 
+    > git push -u origin dev1.0   - to push canges to remote branch 

@@ -31,14 +31,17 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
 
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
           {% if g.user %}
     
             <li class="nav-item active">
               <a class="nav-link" href="{{ url_for('dashboard.profile') }}"><span> {{ g.user['username'] }}</span></a>
+              <!-- Username will link profile page  -->
+              <a class="nav-link" href="/profile"><span> {{ g.user['username'] }}</span></a>
             </li>
+            <!-- <li class="nav-item"><a id="date" class="nav-link" href=""></a></li> -->
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+              <button class="btn btn-sm btn-outline-light"><a href="{{ url_for('auth.logout') }}">Log Out</a></button>
             </li>
           {% else %}
             <li class="nav-item">
@@ -49,6 +52,7 @@
             </li>
           {% endif %}
         </ul>
+
       </div>
     </nav>
 
@@ -78,9 +82,15 @@
     {% block content %}{% endblock %}
   </section>
 
-</body>
 
 
+<script type="text/javascript">
+  n =  new Date();
+  y = n.getFullYear();
+  m = n.getMonth() + 1;
+  d = n.getDate();
+  document.getElementById("date").innerHTML = m + "." + d + "." + y + " ";
+</script>
 
 <!-- Bootstrap core JavaScript
     ================================================== -->

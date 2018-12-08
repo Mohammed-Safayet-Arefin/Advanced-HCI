@@ -4,25 +4,30 @@
 
 
 #profilePic {
-	width: 200px;
+    width: 200px;
 }
 
-/*#heading{
-	margin-top: 2em;
-}*/
-
-table {
-    /*border-collapse: collapse;*/
-    /*border-spacing: 10px 20px;*/
-    /*border: 1px solid gray;*/
+.dashboard-body{
+  font-size: .75em;
+  padding-top: .75em;
+  padding-bottom: .75em;
 }
-
 
 
 #userInfoTable > tbody{
 	margin-bottom: 3em;
 	background: #A5CDE5;
+}
 
+.feather {
+  width: 16px;
+  height: 16px;
+  vertical-align: text-bottom;
+}
+
+#userInfoTable > tbody{
+    margin-bottom: 3em;
+    background: #A5CDE5;
 }
 
 #qualificationsTable {
@@ -30,8 +35,11 @@ table {
 }
 
 
+
+
+
 /* ============================================= */
-/* START: ON/OFF SWITCH							 */
+/* START: ON/OFF SWITCH                          */
 /* ============================================= */
 
 .switch {
@@ -85,7 +93,10 @@ input:checked + .slider:before {
 {
   display: none;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 .on, .off
 {
   color: white;
@@ -96,10 +107,15 @@ input:checked + .slider:before {
   font-size: 10px;
   font-family: Verdana, sans-serif;
 }
+<<<<<<< HEAD
 
 input:checked+ .slider .on
 {display: block;}
 
+=======
+input:checked+ .slider .on
+{display: block;}
+>>>>>>> origin
 input:checked + .slider .off
 {display: none;}*/
 
@@ -134,7 +150,7 @@ input:checked + .slider:after
 
 
 /* ============================================= */
-/* END: ON/OFF SWITCH							 */
+/* END: ON/OFF SWITCH                            */
 /* ============================================= */
 
 
@@ -160,3 +176,4 @@ input:checked + .slider:after
 	border: 1px solid #ccc; 
 	width: 100%;
 }
+

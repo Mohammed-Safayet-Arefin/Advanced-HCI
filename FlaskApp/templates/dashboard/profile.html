@@ -2,27 +2,19 @@
 
 {% block header %}
 
-  	<h1>{% block title %}Profile{% endblock %}</h1>
-  	<link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
-  	<link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+    <h1>{% block title %}Profile{% endblock %}</h1>
 
+    <link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+     <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
 
-    <!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
-	<!--     <script src="/static/js/bootstrap.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>-->
-
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 {% endblock %}
 
 {% block content %}
-
-
-
 
 <!-- 		<div class = "row">
 			<div class="col-md-3 col-lg-3" align="center">  </div>
@@ -361,63 +353,115 @@
 <script>
   feather.replace()
 </script>
+<div class="container-fluid">
+<div class="dashboard-body">
+  <div class="row">
+  <div class="page-wrapper chiller-theme toggled">
+          <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+              <i class="fas fa-bars"></i>
+          </a>
+          <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block sidebar-wrapper">
+              <div class="sidebar-content">
+                  <div class="sidebar-header">
+                      <div class="user-pic">
+                          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                      </div>
+                      <div class="user-info">
+                          <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
+                              <strong>David</strong></a>
+                          </span>
+                          <span class="user-role">Administrator</span>
+                          <span class="user-status">
+                              <span data-feather="circle"></span>
+                              <span>Online</span>
+                          </span>
+                      </div>
+                  </div>
+               
 
-<!-- 
-<script type="text/javascript">
-function displayEmailNotificationsOptions() {
-    var x = document.getElementById("emailNotificationsOptions");
-
-    if (x.style.display == "none" || x.style.display == "") {
-        x.style.display = "inline";
-    } else { 
-        x.style.display = "none";
-    }
-}
-
-function displayAlertsNotificationsOptions() {
-    var x1 = document.getElementById("alertsNotificationsOptions");
-
-    if (x1.style.display == "none" || x1.style.display == "") {
-        x1.style.display = "block";
-    } else {
-        x1.style.display = "none";
-    }
-}
-</script> -->
-
+                  <!-- sidebar-search  -->
+                  <div class="sidebar-menu">
+                      <ul>
+                          <li class="header-menu">
+                              <span>Employee Tools</span>
+                          </li>
+                          <li>
+                             <a href="#">
+                                  <span data-feather="inbox"></span>
+                                  <span>Inbox</span>
+                                  <span class="badge badge-pill badge-danger">New</span>
+                              </a>
+                              <a href="{{ url_for('dashboard.index') }}">
+                                  <span data-feather="layout"></span>
+                                  <span>Dashboard</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#">
+                                  <span data-feather="users"></span>
+                                  <span>Available Jobs</span>
+                                  <span class="badge badge-pill badge-primary">3</span>
+                                  
+                              </a>
+                          </li>
+                          
+                          <li>
+                              <a href="#">
+                                  <span data-feather="bar-chart-2"></span>
+                                  <span>Analytics</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#">
+                                   <span data-feather="map"></span>
+                                  <span>Live Maps</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#">
+                                  <span data-feather="calendar"></span>
+                                  <span>Calendar</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#">
+                                  <span data-feather="list"></span>
+                                  <span>Schedule</span>
+                              </a>
+                          </li>
+                          <li>
+                              <a href="#">
+                                 <span data-feather="book"></span>
+                                  <span>Documentation</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+            </nav>
+          </div>
 
 <!-- http://www.daterangepicker.com/#example1 -->
 <script type="text/javascript">
-	$(function() {
-
-	    var start = moment().subtract(29, 'days');
-	    var end = moment();
-
-	    function cb(start, end) {
-	        $('#reportRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-	    }
-
-	    $('#reportRange').daterangepicker({
-	        startDate: start,
-	        endDate: end,
-	        ranges: {
-	           'Today': [moment(), moment()],
-	           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-	           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-	           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-	           'This Month': [moment().startOf('month'), moment().endOf('month')],
-	           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-	        }
-	    }, cb);
-
-	    cb(start, end);
-
-	});
+    $(function() {
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+        function cb(start, end) {
+            $('#reportRange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        }
+        $('#reportRange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+               'Today': [moment(), moment()],
+               'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+               'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+               'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+               'This Month': [moment().startOf('month'), moment().endOf('month')],
+               'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+        cb(start, end);
+    });
 </script>
-
-
-
-<!-- need to store information - ? -->
-
 
 {% endblock %}

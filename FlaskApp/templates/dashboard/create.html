@@ -1,15 +1,452 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Job{% endblock %}</h1>
+  <!-- <link href="dashboard.css" rel="stylesheet"> -->
+  <link href="{{ url_for('static', filename='css/create.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+  <!-- <h1>{% block title %}Jobs{% endblock %}</h1> -->
+  <!-- {% if g.user %}
+    <a class="action" href="{{ url_for('dashboard.create') }}">New</a>
+  {% endif %} -->
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="job_title">Job Title</label>
-    <input name="job_title" id="job_title" value="{{ request.form['job_title'] }}" required>
-    <label for="job_desc">Body</label>
-    <textarea name="job_desc" id="job_desc">{{ request.form['job_desc'] }}</textarea>
-    <input type="submit" value="Save">
-  </form>
+
+  <div class="container-fluid">
+    <div class="dashboard-body">
+      <div class="row">
+
+               <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
+                            <strong>David</strong></a>
+                        </span>
+                        <span class="user-role">Administrator</span>
+                        <span class="user-status">
+                            <span data-feather="circle"></span>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
+             
+
+                <!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu">
+                            <span>Manager Tools</span>
+                        </li>
+                        <li>
+                           <a href="#">
+                                <span data-feather="inbox"></span>
+                                <span>Inbox</span>
+                                <span class="badge badge-pill badge-danger">New</span>
+                            </a>
+                            <a href="{{ url_for('dashboard.manager_dashboard') }}">
+                                <span data-feather="layout"></span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-feather="users"></span>
+                                <span>Employees</span>
+                               
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                <span>Analytics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                 <span data-feather="map"></span>
+                                <span>Live Maps</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-feather="calendar"></span>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-feather="list"></span>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                               <span data-feather="book"></span>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+          </nav>
+        </div>
+
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+
+              <div class="col-md-10 col-lg-8 col-sm-12">  
+              <form class="create_job_form" method="post">
+
+                <hr>
+                <div class="dropdown float-right">
+                  <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Use Template
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Template A</a>
+                    <a class="dropdown-item" href="#">Template B</a>
+                    <a class="dropdown-item" href="#">Template C</a>
+                  </div>
+                  <div class="float-right"><input class=" btn btn-sm btn-outline-info" type="submit" value="Save"></div>
+                </div>
+    
+               
+                <div class="form-group">
+                <label for="job_title">Job Title</label>
+                <small class="form-text text-muted">Name of the job to be created.</small>
+                <input class="form-control" name="job_title" id="job_title" placeholder="Job Title"value="{{ request.form['job_title'] }}" required>
+                </div>
+
+               <div class="form-group">
+                  <label for="job_desc">Job Description</label>
+                  <textarea class="form-control" name="job_desc" id="job_desc" placeholder="Enter Job Description">{{ request.form['job_desc'] }}</textarea>
+               </div>
+
+
+                <div class="form-group">
+                  <label for="job_credentials">Credentials</label>
+                  <small class="form-text text-muted">Credentials Required for an employee to complete a job. <br> Must be a comma separated list.</small>
+                  <textarea name="job_credentials" class="form-control" id="job_credentials" rows="3" placeholder="Comma Seperated Values Only">{{ request.form['job_credentials'] }}</textarea>
+                </div>
+              
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="job_city">City</label>
+                  <input name="job_city"  id="job_city" type="text" class="form-control"  value="{{ request.form['job_city'] }}">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="job_state">State</label>
+                  <select name="job_state" id="job_state" class="form-control" value="{{ request.form['job_state'] }}">
+                    <option selected>Choose...</option>
+                    <option>Mississippi</option>
+                    <option>Alabama</option>
+                    <option>Louisiana</option>
+                    <option>Georgia</option>
+                    <option>Florida</option>
+                  </select>
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="job_zip">Zip</label>
+                  <input name="job_zip" type="text" class="form-control" id="job_zip" value="{{ request.form['job_zip'] }}">
+                </div>
+              </div>
+
+                <hr>
+                
+                <p><strong>Time Range</strong><small class="form-text text-muted">This is the starting and end time of a job.</small></p>
+                
+                <div class="form-group">
+                  <label for="job_time_beg">Start Time:</label>
+                  <input class="form-control" name="job_time_beg" type="time" id="job_time_beg" name="job_time_beg" min="0:00" max="24:00"  value="{{ request.form['job_time_beg'] }}">
+                </div>
+                 <div class="form-group">
+                  <label for="job_time_end">End Time:</label>
+                  <input class="form-control" name="job_time_end" type="time" id="job_time_end" name="job_time_end" min="0:00" max="24:00" value="{{ request.form['job_time_end'] }}" >
+                </div>
+
+                <hr>
+                <p><strong>Date Range</strong>
+                  <small class="form-text text-muted">This will make a job at the same time for each day in a given range.</small></p>
+
+
+
+                <div class="form-row">
+                  <div class="form-group col-md-10 col-sm-10">
+                    <label for="job_date_beg">Beginning Date</label>
+                    <input class="form-control" type="date" id="job_date_beg" name="job_date_beg" aria-describedby="inputGroupAppend" value="{{ request.form['job_date_beg'] }}"/>
+                  </div>
+                  <div class="form-group col-md-2 col-sm-2 mb-2">
+                    <label for="cal-btn">Calendar</label>
+                     <button id="cal-btn" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal">
+                      <span data-feather="calendar"></span>
+                    </button>
+                  </div>
+              </div>
+
+            
+
+                <div class="modal" tabindex="-1" role="dialog" id="calendarModal">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Calendar Select</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Beginning Date</p>
+                        <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+
+                          <div id="leftcolumn" class="yui3-u">
+                             <!-- Container for the calendar -->
+                             <div id="mycalendar"></div>
+                          </div>
+                          <div id="rightcolumn" class="yui3-u">
+                           <div id="links" style="padding-left:20px;">
+                              Selected date: <span id="selecteddate"></span>
+                           </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Selections</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-row">
+                  <div class="form-group col-md-10 col-sm-10">
+                     <label for="job_date_end">Ending Date</label>
+                  <input class="form-control" type="date" id="job_date_end" name="job_date_end" value="{{ request.form['job_date_end'] }}"/>
+                  </div>
+                  <div class="form-group col-md-2 col-sm-2 mb-2">
+                    <label for="cal-btn">Calendar</label>
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal2">
+                    <span data-feather="calendar"></span>
+                  </button>
+                  </div>
+              </div>
+
+               <!--  <div class="form-group col-md-6" >
+                  <label for="job_date_end">Ending Date</label>
+                  <input class="form-control" type="date" id="job_date_end" name="job_date_end" />
+
+                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal2">
+                    <span data-feather="calendar"></span>
+                  </button>
+                </div> -->
+
+                <div class="modal" tabindex="-1" role="dialog" id="calendarModal2">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Calendar Select</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>End Date</p>
+                        <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
+
+                          <div id="leftcolumn" class="yui3-u">
+                             <!-- Container for the calendar -->
+                             <div id="mycalendar2"></div>
+                          </div>
+                          <div id="rightcolumn" class="yui3-u">
+                           <div id="links" style="padding-left:20px;">
+                              Selected date: <span id="selecteddate2"></span>
+                           </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Selections</button>  <!--onclick="window.opener['dateitem'] = selecteddate"-->
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!----------------------------- Days of the Week Selection ------------------------------->
+                <small class="form-text text-muted">Select Affected Days Of The Week:</small>
+                <div class="form-row">
+                  <div class="form-group col-md-6 col-sm-6">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Sunday">
+                      <label class="form-check-label" for="inlineCheckbox1">Select All</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Sunday">
+                      <label class="form-check-label" for="inlineCheckbox1">Sunday</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Monday">
+                      <label class="form-check-label" for="inlineCheckbox2">Monday</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Tuesday">
+                      <label class="form-check-label" for="inlineCheckbox3">Tuesday</label>
+                    </div>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-6">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Wednesday">
+                      <label class="form-check-label" for="inlineCheckbox4">Wednesday</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Thursday">
+                      <label class="form-check-label" for="inlineCheckbox5">Thursday</label>
+                    </div>
+                     <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Friday">
+                      <label class="form-check-label" for="inlineCheckbox6">Friday</label>
+                    </div>
+                     <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox" value="Saturday">
+                      <label class="form-check-label" for="inlineCheckbox7">Saturday</label>
+                    </div>
+                     </div>
+                </div>
+
+                <hr>
+                <div class="form-group">
+                  <label for="job_extra">Multiple Job Count</label>
+                  <small class="form-text text-muted">The number of duplicate job postings to make for each day.</small>
+                  <input name="job_extra" class="form-control" type=number name="job_extra" id="job_extra" value="{{ request.form['job_extra'] }}" min="0"/>
+                </div>
+                
+                <br>
+          
+               <div class="form-group">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                  <label class="form-check-label" for="defaultCheck1">
+                    <small class="text-muted form-text">Create New Template for current Job. </small>
+                  </label>
+                </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <a class="btn btn-sm btn-outline-secondary" href="/" role="button">Cancel</a>
+                    
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <div class="float-right">
+                      <input class=" btn btn-sm btn-outline-info" type="submit" value="Save">
+                      <input class=" btn btn-sm btn-info" type="submit" value="Publish">
+                    </div>
+                  </div>
+
+                </div>
+
+              </form>
+
+            </div> <!-- End of Form column div -->
+        </main>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+  <script src="{{ url_for('static', filename='js/jquery.js') }}"></script> 
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script> -->
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+  <script src="http://cdn.alloyui.com/3.0.1/aui/aui-min.js"></script>
+  <script type="text/javascript">
+    YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
+    
+        // Create a new instance of calendar, placing it in
+        // #mycalendar container, setting its width to 340px,
+        // the flags for showing previous and next month's
+        // dates in available empty cells to true, and setting
+        // the date to today's date.
+        var calendar = new Y.Calendar({
+          contentBox: "#mycalendar",
+          width:'340px',
+          showPrevMonth: true,
+          showNextMonth: true,
+          date: new Date()}).render();
+    
+        // Get a reference to Y.DataType.Date
+        var dtdate = Y.DataType.Date;
+    
+        // Listen to calendar's selectionChange event.
+        calendar.on("selectionChange", function (ev) {
+    
+          // Get the date from the list of selected
+          // dates returned with the event (since only
+          // single selection is enabled by default,
+          // we expect there to be only one date)
+          var newDate = ev.newSelection[0];
+    
+          // Format the date and output it to a DOM
+          // element.
+          Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+        });
+    
+    });
+    </script>
+
+    <script type="text/javascript">
+    YUI().use('calendar', 'datatype-date', 'cssbutton',  function(Y) {
+    
+        // Create a new instance of calendar, placing it in
+        // #mycalendar container, setting its width to 340px,
+        // the flags for showing previous and next month's
+        // dates in available empty cells to true, and setting
+        // the date to today's date.
+        var calendar2 = new Y.Calendar({
+          contentBox: "#mycalendar2",
+          width:'340px',
+          showPrevMonth: true,
+          showNextMonth: true,
+          date: new Date()}).render();
+    
+        // Get a reference to Y.DataType.Date
+        var dtdate = Y.DataType.Date;
+    
+        // Listen to calendar's selectionChange event.
+        calendar2.on("selectionChange", function (ev) {
+    
+          // Get the date from the list of selected
+          // dates returned with the event (since only
+          // single selection is enabled by default,
+          // we expect there to be only one date)
+          var newDate = ev.newSelection[0];
+    
+          // Format the date and output it to a DOM
+          // element.
+          Y.one("#selecteddate2").setHTML(dtdate.format(newDate));
+        });
+    
+    });
+    </script>
+
 {% endblock %}

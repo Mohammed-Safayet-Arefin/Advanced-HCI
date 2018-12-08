@@ -11,18 +11,32 @@
 <div class='login-body text-center'>
    <form method="post" class="form-login">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="username" class="sr-only">Username</label>
+
+       <label for="username" class="sr-only">Username</label>
       <input name="username" id="username"  class='form-control' placeholder="Username" required autofocus>
-      <label for="password" class="sr-only">Password</label>
+
+       <label for="password" class="sr-only">Password</label>
       <input type="password" name="password" id="password" class='form-control' placeholder='Password'required>
 
-      <div class="checkbox mb-3">
+
+       {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color:red;">{{ message }} </p>
+                 {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-      <p class="mt-5 mb-3 text-muted">Flexible Worker &copy; 2018</p>
+   
+       <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+         <span class="psw">  <a class="nav-link" href="{{ url_for('auth.register') }}">Not registered yet?</a></span>
+       <p class="mt-5 mb-3 text-muted">Flexible Worker &copy; 2018</p>
     </form>
 </div>
       

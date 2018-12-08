@@ -6,14 +6,27 @@
 {% endblock %}
 
 {% block content %}
-
-  <div class='register-body text-center'>
+<div class='register-body text-center'>
    <form method="post" class="form-register">
       <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
+       <label for="u_id" class="sr-only">Manager_id</label>
+      <input name="u_id" id="u_id"  class='form-control' placeholder="ID" required autofocus>
+
       <label for="username" class="sr-only">Username</label>
       <input name="username" id="username"  class='form-control' placeholder="Username" required autofocus>
-      <label for="password" class="sr-only">Password</label>
+
+       <label for="password" class="sr-only">Password</label>
       <input type="password" name="password" id="password" class='form-control' placeholder='Password'required>
+
+       {% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+                {% for message in messages %}
+                    <p style="color:red;">{{ message }}</p>
+                 {% endfor %}
+            {% endif %}
+        {% endwith %}
 
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
