@@ -14,10 +14,9 @@
 }
 
 
-table {
-    /*border-collapse: collapse;*/
-    /*border-spacing: 10px 20px;*/
-    /*border: 1px solid gray;*/
+#userInfoTable > tbody{
+	margin-bottom: 3em;
+	background: #A5CDE5;
 }
 
 .feather {
@@ -29,12 +28,12 @@ table {
 #userInfoTable > tbody{
     margin-bottom: 3em;
     background: #A5CDE5;
-
 }
 
 #qualificationsTable {
-    margin-bottom: 3em;
+	margin-bottom: 3em;
 }
+
 
 
 
@@ -94,6 +93,10 @@ input:checked + .slider:before {
 {
   display: none;
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin
 .on, .off
 {
   color: white;
@@ -104,8 +107,15 @@ input:checked + .slider:before {
   font-size: 10px;
   font-family: Verdana, sans-serif;
 }
+<<<<<<< HEAD
+
 input:checked+ .slider .on
 {display: block;}
+
+=======
+input:checked+ .slider .on
+{display: block;}
+>>>>>>> origin
 input:checked + .slider .off
 {display: none;}*/
 
@@ -146,23 +156,24 @@ input:checked + .slider:after
 
 
 #emailNotificationsOptions {
-    display: none;
+	display: none;
 }
 
 #alertsNotificationsOptions{
-    display: none;
+	display: none;
 }
 
 
 #recomendationsButton{
-    width: 10px;
+	width: 10px;
 }
 
 
 #reportRange{
-    background: #fff; 
-    cursor: pointer; 
-    padding: 5px 10px; 
-    border: 1px solid #ccc; 
-    width: 100%;
+	background: #fff; 
+	cursor: pointer; 
+	padding: 5px 10px; 
+	border: 1px solid #ccc; 
+	width: 100%;
 }
+

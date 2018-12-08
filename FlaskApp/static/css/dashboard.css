@@ -43,11 +43,11 @@ td > .btn-outline-primary:hover{
   width: 60px;
 } 
 
-.feather {
+/*.feather {
   width: 16px;
   height: 16px;
   vertical-align: text-bottom;
-}
+}*/
 
 .ico_help {
   margin: 5px 0px 10px 5px;
@@ -251,4 +251,58 @@ td > .btn-outline-primary:hover{
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}*/
+
+
+
+.onlineIcon{
+  fill: green;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.awardIcon{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+
+/*NOTIFICATIONS*/
+
+.featherIcon {
+  width: 2.3em;
+  height: 2.3em;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: transparent;
+  margin-right: 7px;
+}
+
+.alert {
+  position: relative;
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
+/* For separation between the notifications cards */
+.card-text{
+  margin-top:-7px;
+}
+
+.text{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+
+}
+
+/* unvisited link */
+/*.card-body a:link, 
+.card-body a:visited, 
+.card-body a:hover, 
+.card-body a:active {
+  color: white;
 }*/
