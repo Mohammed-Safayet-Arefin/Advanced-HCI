@@ -25,7 +25,32 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
 
-    return render_template('dashboard/index.html', jobs=jobs)
+
+
+    ##############################################################################################################################################
+    # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT! 
+    #
+    # ALSO - need to do 'init-db' each time, else same set of notifications will get added to the table everytime the page is refreshed
+    ##############################################################################################################################################
+
+    #EMPLOYEES
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('employee', 'New Delivery Job Posted! ','info','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('employee', 'Reminder: Delivery Job # is scheduled for today.','alert','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('employee', 'You have not scheduled any jobs for this week.','warning','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('employee', 'Job # was successfully added to your schedule.','success','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('employee', 'Scheduled Job # was cancelled!','alert','2018-01-01 00:00:00'))
+
+    db.commit()
+
+
+    notifications = db.execute('SELECT * FROM Notification n').fetchall()
+
+    return render_template('dashboard/index.html', jobs=jobs, notifications=notifications)
 
 @bp.route("/manager_dashboard")
 def manager_dashboard():
@@ -36,7 +61,29 @@ def manager_dashboard():
         ' ORDER BY created DESC'
     ).fetchall()
 
-    return render_template('dashboard/manager_dashboard.html', jobs=jobs)
+
+    ##############################################################################################################################################
+    # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT! 
+    #
+    # ALSO - need to do 'init-db' each time, else same set of notifications will get added to the table everytime the page is refreshed
+    ##############################################################################################################################################
+
+    # MANAGERS
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('manager', 'Joe David accepted Delivery Job #.','info','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('manager', '2 Jobs scheduled for today are without employees.','alert','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('manager', '3 Jobs for tomorrow are without employees.','warning','2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
+                ('manager', 'All scheduled jobs for today were successfully assigned.','success','2018-01-01 00:00:00'))
+
+    db.commit()
+
+
+    notifications = db.execute('SELECT * FROM Notification n').fetchall()
+
+    return render_template('dashboard/manager_dashboard.html', jobs=jobs, notifications=notifications)
 
 
 # @bp.route('/<int:id>/profile')
@@ -111,6 +158,17 @@ def create(id=None):
             return redirect(url_for('dashboard.manager_dashboard'))
 
     return render_template('dashboard/create.html', templates=templates)
+
+
+####################################################################################
+@bp.route('/profile', methods=('GET', 'POST'))
+@login_required
+def profile():
+    # if request.method == 'POST':
+        # return redirect(url_for('dashboard.index'))
+
+    return render_template('dashboard/profile.html')
+####################################################################################
 
 
 def get_job(id, check_author=True):

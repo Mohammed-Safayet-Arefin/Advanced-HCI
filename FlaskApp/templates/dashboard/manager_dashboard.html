@@ -31,7 +31,7 @@
                         </span>
                         <span class="user-role">Administrator</span>
                         <span class="user-status">
-                            <span data-feather="circle"></span>
+                            <span class="onlineIcon" data-feather="circle"></span>
                             <span>Online</span>
                         </span>
                     </div>
@@ -159,11 +159,13 @@
                {% if g.user %}
                   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                   <h4>Available Jobs</h4>
-                  <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                      <button class="btn btn-sm btn-outline-secondary"><a class="action" href="{{ url_for('dashboard.create') }}"><span data-feather="plus"></span><span>Create Job </span></a></button>
-                    </div>
-                  </div>
+                  <!-- <div class="btn-toolbar mb-2 mb-md-0"> -->
+                    <!-- <div class="btn-group mr-2"> -->
+                      <a class="action" href="{{ url_for('dashboard.create') }}">
+                        <button class="btn btn-sm btn-outline-secondary">
+                          <span data-feather="plus"></span> Create Job </button> </a> 
+                    <!-- </div> -->
+                  <!-- </div> -->
                 </div>
               {% endif %}
 
@@ -472,32 +474,57 @@
           </div> <!-- End column -->
 
 
+<!-- if no notifications available, add message of "no new notifications" -->
 
+<!-- ################################################################################################################################# -->
 
           <div class="col-lg-4">
-
             <div class="row">
                <div class="col-lg-12"> 
                  <div class="float-right">
                   <!-- <img class="ico_help" src="{{ url_for('static', filename='images/help_icon.png') }}"> -->
-                  <!-- <span class="feather-32" data-feather="help-circle"></span> -->
+                  <!-- <span class="feather-32" data-feather="help-circle"></span> --> 
                 </div>
               </div>
             </div>
 
-            <div class="card notification">
+
+  
+            <div class="card notification" style="min-height: 40em; height: 40em;">
               <h5 class="card-header text-center">NOTIFICATIONS</h5>
-              <div class="card-body">
-                <p class="card-text"><span data-feather="alert-circle"></span> Notification Alert Text. 12 New Delivery Job Posted in the last hour.</p>
-                <hr>
-                <p class="card-text"><span data-feather="alert-triangle"></span> Notification Alert Text. Joe David, Accepted a Delivery Job for 9am - 12am in Denver, Colorado. </p>
-                <hr>
-                <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text. 9 New Delivery Job that fit your requested schedule were posted </p>
+              <div class="card-body" style="overflow-y: scroll;">
+              
+                {% for notification in notifications %}
+                    {% if notification['type'] == "manager" %}
+
+                      {% if notification['priority'] == "info" %}
+                        <p class="card-text alert alert-info text"> <span class="featherIcon" data-feather="info" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                      {% endif %} 
+
+
+                      {% if notification['priority'] == "alert" %}
+                        <p class="card-text alert alert-danger text"> <span class="featherIcon" data-feather="alert-triangle" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                      {% endif %} 
+
+
+                      {% if notification['priority'] == "warning" %}
+                        <p class="card-text alert alert-warning text"> <span class="featherIcon" data-feather="alert-octagon" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                      {% endif %} 
+
+
+                      {% if notification['priority'] == "success" %}
+                        <p class="card-text alert alert-success text"> <span class="featherIcon" data-feather="check-circle" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                      {% endif %} 
+                    
+                    {% endif %} 
+                {% endfor %}
+
               </div>
-          </div>
+            </div>
+
           <hr>
 
-           <h5 class="text-center"><span data-feather="award"></span> TOP PERFORMERS</h5>
+           <h5 class="text-center"><span class="awardIcon" data-feather="award"></span> TOP PERFORMERS</h5>
            <div class="card notification">
               
               <div class="card-body">
@@ -588,7 +615,16 @@
       feather.replace()
     </script>
 
+
     <script type="text/javascript">
+
+      $('.closeIcon').on('click',function() {
+        $(this).closest('.fullCard').fadeOut();
+      })
+
+      $('.closeIconInfo').on('click',function() {
+        $(this).closest('.fullCard').fadeOut();
+      })
       
       $(document).ready(function(e){
           $('.search-panel .dropdown-menu').find('a').click(function(e) {

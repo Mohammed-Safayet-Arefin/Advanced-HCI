@@ -252,3 +252,67 @@ td > .btn-outline-primary:hover{
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }*/
+
+
+
+.onlineIcon{
+  fill: green;
+}
+
+.awardIcon{
+  width: 1.5em;
+  height: 1.5em;
+}
+
+
+/*NOTIFICATIONS*/
+
+.featherIcon {
+  width: 2.3em;
+  height: 2.3em;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: transparent;
+  margin-right: 7px;
+}
+
+.alert {
+  position: relative;
+  padding: 0.3rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+
+/* For separation between the notifications cards */
+.card-text{
+  margin-top:-7px;
+}
+
+.text{
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+
+}
+
+/* unvisited link */
+a:link {
+  color: white;
+}
+
+/* visited link */
+a:visited {
+  color: white;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
