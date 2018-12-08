@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
-  <h1>{% block title %}Edit "{{ job['job_title'] }}"{% endblock %}</h1>
+  <link href="{{ url_for('static', filename='css/create.css') }}" rel="stylesheet">
+   <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!-- <h1>{% block title %}Edit "{{ job['job_title'] }}"{% endblock %}</h1> -->
 {% endblock %}
 
 {% block content %}
@@ -20,7 +22,7 @@
             <div class="sidebar-content">
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                         <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name">Scarlett
@@ -37,7 +39,7 @@
               {% if g.user %}
               <div class="new-job">
                 <h6 class="d-flex justify-content-between align-items-center px-3 mt-4 mb-1">
-                  <a class="action" href="{{ url_for('dashboard.create') }}"><span>Create New Job</span></a>
+                  <a class="action" href="{{ url_for('dashboard.create') }}"><span>Create Job</span></a>
                   <a class="d-flex align-items-center text-muted" href="#">
                   <span data-feather="plus-circle"></span> </a>
                 </h6>
@@ -47,9 +49,6 @@
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
-                        <li class="header-menu">
-                            <span>Manager Tools</span>
-                        </li>
                         <li>
                            <a href="#">
                                 <span data-feather="inbox"></span>
@@ -76,22 +75,6 @@
                                 <span data-feather="bar-chart-2"></span>
                                 <span>Analytics</span>
                             </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="#">Pie chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Line chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Bar chart</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Histogram</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                         <li>
                             <a href="#">
@@ -191,7 +174,7 @@
                 </div>
                 <div class="form-group col-md-4">
                   <label for="job_state">State</label>
-                  <select name="job_state" id="job_state" class="form-control" value="{{ request.form['job_state']  or job['job_state']}}">
+                  <select name="job_state" id="job_state" class="form-control" value="{{ request.form['job_state'] or job['job_state']}}">
                     <option selected>Choose...</option>
                     <option>Mississippi</option>
                     <option>Alabama</option>
@@ -212,11 +195,11 @@
                 
                 <div class="form-group">
                   <label for="job_time_beg">Start Time:</label>
-                  <input class="form-control" name="job_time_beg" type="time" id="job_time_beg" name="job_time_beg" min="0:00" max="24:00"  value="{{ request.form['job_time_beg'] }}">
+                  <input class="form-control" name="job_time_beg" type="time" id="job_time_beg" name="job_time_beg" min="0:00" max="24:00"  value="{{ request.form['job_time_beg'] or job['job_time_beg'] }}">
                 </div>
                  <div class="form-group">
                   <label for="job_time_end">End Time:</label>
-                  <input class="form-control" name="job_time_end" type="time" id="job_time_end" name="job_time_end" min="0:00" max="24:00" value="{{ request.form['job_time_beg'] }}" >
+                  <input class="form-control" name="job_time_end" type="time" id="job_time_end" name="job_time_end" min="0:00" max="24:00" value="{{ request.form['job_time_end'] or job['job_time_end'] }}" >
                 </div>
 
                 <hr>
@@ -224,110 +207,19 @@
                   <small class="form-text text-muted">This will make a job at the same time for each day in a given range.</small></p>
 
 
-
                 <div class="form-row">
-                  <div class="form-group col-md-10 col-sm-10">
+                  <div class="form-group col-md-12 col-sm-12">
                     <label for="job_date_beg">Beginning Date</label>
                     <input class="form-control" type="date" id="job_date_beg" name="job_date_beg" aria-describedby="inputGroupAppend"/>
                   </div>
-                  <div class="form-group col-md-2 col-sm-2 mb-2">
-                    <label for="cal-btn">Calendar</label>
-                     <button id="cal-btn" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal">
-                      <span data-feather="calendar"></span>
-                    </button>
-                  </div>
               </div>
 
-
-               <div class="modal" tabindex="-1" role="dialog" id="calendarModal">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Calendar Select</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>Beginning Date</p>
-                        <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
-
-                          <div id="leftcolumn" class="yui3-u">
-                             <!-- Container for the calendar -->
-                             <div id="mycalendar"></div>
-                          </div>
-                          <div id="rightcolumn" class="yui3-u">
-                           <div id="links" style="padding-left:20px;">
-                              Selected date: <span id="selecteddate"></span>
-                           </div>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Selections</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
                 <div class="form-row">
-                  <div class="form-group col-md-10 col-sm-10">
+                  <div class="form-group col-md-12 col-sm-12">
                      <label for="job_date_end">Ending Date</label>
                   <input class="form-control" type="date" id="job_date_end" name="job_date_end" />
                   </div>
-                  <div class="form-group col-md-2 col-sm-2 mb-2">
-                    <label for="cal-btn">Calendar</label>
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal2">
-                    <span data-feather="calendar"></span>
-                  </button>
-                  </div>
               </div>
-
-               <!--  <div class="form-group col-md-6" >
-                  <label for="job_date_end">Ending Date</label>
-                  <input class="form-control" type="date" id="job_date_end" name="job_date_end" />
-
-                  <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#calendarModal2">
-                    <span data-feather="calendar"></span>
-                  </button>
-                </div> -->
-
-                <div class="modal" tabindex="-1" role="dialog" id="calendarModal2">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Calendar Select</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <p>End Date</p>
-                        <div id="demo" class="yui3-skin-sam yui3-g"> <!-- You need this skin class -->
-
-                          <div id="leftcolumn" class="yui3-u">
-                             <!-- Container for the calendar -->
-                             <div id="mycalendar2"></div>
-                          </div>
-                          <div id="rightcolumn" class="yui3-u">
-                           <div id="links" style="padding-left:20px;">
-                              Selected date: <span id="selecteddate2"></span>
-                           </div>
-                          </div>
-                        </div>
-                        
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Keep Selections</button>  <!--onclick="window.opener['dateitem'] = selecteddate"-->
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 <!----------------------------- Days of the Week Selection ------------------------------->
                 <small class="form-text text-muted">Select Affected Days Of The Week:</small>
                 <div class="form-row">

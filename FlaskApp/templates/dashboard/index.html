@@ -26,7 +26,7 @@
             <div class="sidebar-content">
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                        <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                     </div>
                     <div class="user-info">
                         <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
@@ -44,69 +44,88 @@
                 <!-- sidebar-search  -->
                 <div class="sidebar-menu">
                     <ul>
-                        <li class="header-menu">
-                            <span>Employee Tools</span>
-                        </li>
                         <li>
-                           <a href="#">
+                           <a href="https://accounts.google.com/signin/v2/sl/pwd?service=CPanel&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
                                 <span data-feather="inbox"></span>
                                 <span>Inbox</span>
-                                <span class="badge badge-pill badge-danger">New</span>
+                                <span class="badge badge-pill badge-danger">3 New</span>
                             </a>
+                       </li>
+                        <li>
                             <a href="{{ url_for('dashboard.index') }}">
                                 <span data-feather="layout"></span>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                <span data-feather="users"></span>
+                            <a href="/available_jobs">
+                                <span data-feather="clipboard"></span>
                                 <span>Available Jobs</span>
-                                <span class="badge badge-pill badge-primary">3</span>
-                                
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="#">
-                                <span data-feather="bar-chart-2"></span>
-                                <span>Analytics</span>
+                                <span class="badge badge-pill badge-primary">98</span>
+                      
                             </a>
                         </li>
                         <li>
                             <a href="#">
+                                <span data-feather="briefcase"></span>
+                                <span>Claimed Jobs</span><span class="badge badge-pill badge-primary">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/maps">
                                  <span data-feather="map"></span>
                                 <span>Live Maps</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="https://www.google.com/calendar">
                                 <span data-feather="calendar"></span>
                                 <span>Calendar</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/employee_schedule">
                                 <span data-feather="list"></span>
                                 <span>Schedule</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                               <span data-feather="book"></span>
+                                 <span data-feather="book"></span>
                                 <span>Documentation</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-          </nav>
-        </div>
                 <!-- sidebar-menu  -->
-         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+            </div>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">
+                <a href="#">
+                    <span data-feather="bell"></span>
+                    <span class="badge badge-pill badge-warning notification">3</span>
+                </a>
+                <a href="#">
+                    <span data-feather="mail"></span>
+                    <span class="badge badge-pill badge-success notification">7</span>
+                </a>
+                <a href="#">
+                    <span data-feather="settings"></span>
+                    <span class="badge-sonar"></span>
+                </a>
+                <a href="#">
+                    <i class="fa fa-power-off"></i>
+                </a>
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+      </div>
+                <!-- sidebar-menu  -->
+         <main role="main" class="col-lg-10 col-md-12 ml-sm-auto  px-4">
   
 
           <div class="row"> 
-            <div class="col-lg-8">
+            <div class="col-lg-8 col-md-12 col-sm-12">
 
               {% if g.user %}
                   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
@@ -142,6 +161,16 @@
 
                 <div class="events">
                   <ul>
+                     <li class="events-group">
+                      <div class="top-info"><span>Sunday</span></div>
+                      <ul>
+                        <li class="single-event" data-start="09:00" data-end="10:00" data-content="event-abs-circuit" data-event="event-1">
+                          <a href="#0">
+                            <em class="event-name">Delivery Route</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
                     <li class="events-group">
                       <div class="top-info"><span>Monday</span></div>
 
@@ -151,47 +180,40 @@
                             <em class="event-name">Delivery Route</em>
                           </a>
                         </li>
-
                         <li class="single-event" data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
                           <a href="#0">
                             <em class="event-name">Courier</em>
                           </a>
                         </li>
-
                       </ul>
                     </li>
 
                     <li class="events-group">
                       <div class="top-info"><span>Tuesday</span></div>
-
                       <ul>
                         <li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
                           <a href="#0">
                             <em class="event-name">Delivery Route</em>
                           </a>
                         </li>
-
                         <li class="single-event" data-start="11:30" data-end="12:30"  data-content="event-restorative-yoga" data-event="event-4">
                           <a href="#0">
                             <em class="event-name"></em>
-                            <span class="badge badge-pill badge-light avail-jobs-badge">4</span>
+                             <span class="badge badge-pill badge-danger btn-block">4 New Jobs</span>
                           </a>
                         </li>
                       </ul>
                     </li>
-
                     <li class="events-group">
                       <div class="top-info"><span>Wednesday</span></div>
 
                       <ul>
                         <li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
                           <a href="#0">
-                            <span class="badge badge-pill badge-light avail-jobs-badge">4</span>
+                             <span class="badge badge-pill badge-danger btn-block">4 New Jobs</span>
                             <em class="event-name"></em>
-
                           </a>
                         </li>
-
                         <li class="single-event" data-start="10:45" data-end="11:45" data-content="event-yoga-1" data-event="event-1">
                           <a href="#0">
                             <em class="event-name">Courier Delivery</em>
@@ -202,18 +224,16 @@
 
                     <li class="events-group">
                       <div class="top-info"><span>Thursday</span></div>
-
                       <ul>
                         <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
                           <a href="#0">
                             <em class="event-name">Handler</em>
                           </a>
                         </li>
-
                         <li class="single-event" data-start="11:00" data-end="12:00" data-content="event-restorative-yoga" data-event="event-4">
                           <a href="#0">
                             <em class="event-name"></em>
-                            <span class="badge badge-pill badge-light avail-jobs-badge">2</span>
+                             <span class="badge badge-pill badge-danger btn-block">2 New Jobs</span>
                           </a>
                         </li>
                       </ul>
@@ -224,6 +244,18 @@
 
                       <ul>
                         <li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+                          <a href="#0">
+                            <em class="event-name">Handler</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="events-group">
+                      <div class="top-info"><span>Saturday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="9:00" data-end="10:00"  data-content="event-rowing-workout" data-event="event-2">
                           <a href="#0">
                             <em class="event-name">Handler</em>
                           </a>
@@ -246,8 +278,6 @@
                   <div class="body">
                     <div class="event-info"></div>
                     <div class="body-bg">
-                        
-
                     </div>
                   </div>
 
@@ -266,7 +296,7 @@
            
 
             <div class="row">    
-              <div class="col-lg-8 search-bar ">
+              <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 search-bar ">
               <div class="input-group">
                       <input type="hidden" name="search_param" value="all" id="search_param">         
                       <input id="search-input" type="text" class="form-control" name="x" placeholder="Search Jobs">
@@ -275,17 +305,17 @@
                             <span id="search_concept">Filter by</span> <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" role="menu">
-                            <li><a href="#Location">Location</a></li>
-                            <li><a href="#Day">Day of the Week</a></li>
-                            <li><a href="#Qualifications">Qualification</a></li>
-                            <li><a href="#Time">Time of Day</a></li>
+                            <li class="dropdown-item"><a href="#Location">Location</a></li>
+                            <li class="dropdown-item"><a href="#Day">Day of the Week</a></li>
+                            <li class="dropdown-item"><a href="#Qualifications">Qualification</a></li>
+                            <li class="dropdown-item"><a href="#Time">Time of Day</a></li>
                           </ul>
                       </div>
               </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-1 mb-3">
-                <button class="btn btn-sm btn-outline-secondary">
+                <button class="btn btn-block btn-sm btn-outline-secondary">
                 <span data-feather="filter"></span> Advanced Filter</button>
               </div>
               </div>
@@ -316,11 +346,6 @@
                         <td>{{ job['job_city']}}, {{job['job_state']}}</td>
                         <td>{{ job['created'].strftime('%Y-%m-%d') }}</td>
                         <td><button class="btn btn-sm btn-dark qualification-tags">{{job['job_credentials']}}</button></td>
-                        <!-- {% if g.user['u_id'] == job['m_id'] %}
-                          <td>
-                            <a class="action" href="{{ url_for('dashboard.update', id=job['job_id']) }}">Claim</a>
-                          </td>
-                        {% endif %} -->
                         <td>{{ job['job_extra'] }}</td>
                         <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
                         
@@ -382,7 +407,7 @@
                                   <div class="modal-footer">
 
                                     <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" onclick="return confirm('Are you sure you want to claim this job?');">
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" onclick="return confirm('Are you sure you want to claim this job');">
                                      Claim Job
                                    </button>
                                    
@@ -574,16 +599,7 @@
 
 
 
-          <div class="col-lg-4">
-
-            <div class="row">
-               <div class="col-lg-12"> 
-                 <div class="float-right">
-                  <!-- <img class="ico_help" src="{{ url_for('static', filename='images/help_icon.png') }}"> -->
-                  <!-- <span class="feather-32" data-feather="help-circle"></span> -->
-                </div>
-              </div>
-            </div>
+          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
 
             <div class="card notification">
               <h5 class="card-header text-center">NOTIFICATIONS</h5>
@@ -593,36 +609,49 @@
                 <p class="card-text"><span data-feather="alert-triangle"></span> Notification Alert Text. Joe David, Accepted a Delivery Job for 9am - 12am in Denver, Colorado. </p>
                 <hr>
                 <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text. 9 New Delivery Job that fit your requested schedule were posted </p>
+                <hr>
+                <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text.  Joe David, Accepted a Delivery Job for 9am - 12am in Denver, Colorado.  </p>
+                <hr>
+                <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text. 9 New Delivery Job that fit your requested schedule were posted </p>
               </div>
           </div>
 
           <hr>
-          <div class="row">
-            <div class="col-6"> 
-                <img class="metric" src="{{ url_for('static', filename='images/metrics_claimed.png') }}">
-            </div>
-
-            <div class="col-6"> 
-              <img class="metric" src="{{ url_for('static', filename='images/metrics_hours.png') }}">
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-6">
-              <img class="metric" src="{{ url_for('static', filename='images/metrics_atten.png') }}">
-            </div>
-
-            <div class="col-6">
-             <img class="metric" src="{{ url_for('static', filename='images/metrics_punc.png') }}">
-            </div>
-          </div>
-          </div>
-
           
+          <!-- Employee Metrics -->
+          <div class="row">
+            <div class="col-6"> 
 
+                <div class="metrics metrics-blue">
+                    <p><span class="metrics-nums">12</span><br>Jobs<br>Claimed</p>
+                </div>
+            </div>
+            <div class="col-6"> 
+              <a href="{{ url_for('dashboard.user_schedule')}}">
+              <div class="metrics metrics-purple">
+                <p><span class="metrics-nums">32</span> <br> Hours<br>Scheduled</p>
+              </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="metrics metrics-purple">
+                <p><span class="metrics-nums">100 %</span> <br> Attendance</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="metrics metrics-blue">
+                <p><span class="metrics-nums">100 %</span> <br> Puncuality</p>
+              </div>
+            </div>
+          </div>
+          </div>
        </div> <!-- End of row -->
+      </main>
 
-        </main>
+
       </div>
       </div>
     </div>

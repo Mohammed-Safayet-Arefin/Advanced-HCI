@@ -24,11 +24,20 @@
   
   <body>
 
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="/">Flexible Worker</a>
+  <nav class="navbar navbar-dark ml-auto fixed-top bg-dark">
+    
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+     
+      <a class="navbar-brand" href="/"> <img class="img-responsive" src="{{ url_for('static', filename='images/fedex_logo.png') }}" alt="FedEx Logo"></a>
+
+       {% if g.user %}
+        <button class="btn btn-sm btn-outline-light"><a href="{{ url_for('auth.logout') }}">Log Out</a></button>
+       {% endif %}
+      
+      
       <div class="collapse navbar-collapse" id="navbarCollapse">
 
         <ul class="navbar-nav ml-auto">
@@ -38,10 +47,57 @@
               <!-- Username will link profile page  -->
               <a class="nav-link" href="/profile"><span> {{ g.user['username'] }}</span></a>
             </li>
-            <!-- <li class="nav-item"><a id="date" class="nav-link" href=""></a></li> -->
-            <li class="nav-item active">
-              <button class="btn btn-sm btn-outline-light"><a href="{{ url_for('auth.logout') }}">Log Out</a></button>
+            <li class="nav-item">
+             <a class="nav-link" href="#">
+                  <span data-feather="inbox"></span>
+                  <span>Inbox</span>
+              </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dashboard.manager_dashboard') }}">
+                    <span data-feather="layout"></span>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            
+           <li class="nav-item">
+              <a class="nav-link" href="#">
+                  <span data-feather="users"></span>
+                  <span>Employees</span>
+              </a>
+            </li>
+                
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="bar-chart-2"></span>
+                    <span>Analytics</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                     <span data-feather="map"></span>
+                    <span>Live Maps</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                     <span data-feather="calendar"></span>
+                    <span>Calendar</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span data-feather="list"></span>
+                    <span>Schedule</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                     <span data-feather="book"></span>
+                    <span>Documentation</span>
+                </a>
+            </li>
+
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
@@ -55,21 +111,6 @@
       </div>
     </nav>
 
-
-
-
-  <!-- <nav>
-  <h1>Flexible Worker App</h1>
-  <ul> 
-    {% if g.user %}
-        <li><span> {{ g.user['username'] }}</span></li>
-        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-    {% else %}
-        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-    {% endif %}
-  </ul>
-  </nav> -->
 
   <section class="content">
     <header>
@@ -88,7 +129,7 @@
   y = n.getFullYear();
   m = n.getMonth() + 1;
   d = n.getDate();
-  document.getElementById("date").innerHTML = m + "." + d + "." + y + " ";
+  // document.getElementById("date").innerHTML = m + "." + d + "." + y + " ";
 </script>
 
 <!-- Bootstrap core JavaScript

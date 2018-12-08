@@ -1,0 +1,382 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <!-- <link href="dashboard.css" rel="stylesheet"> -->
+  <link href="{{ url_for('static', filename='css/dashboard.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/schedule.css') }}"  rel="stylesheet"> <!-- style for worker schedule-->
+   <link href="{{ url_for('static', filename='css/schedule-main.css') }}"  rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!-- <h1>{% block title %}Jobs{% endblock %}</h1> -->
+  <!-- {% if g.user %}
+    <a class="action" href="{{ url_for('dashboard.create') }}">New</a>
+  {% endif %} -->
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="dashboard-body">
+      <div class="row">
+
+        <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block sidebar-wrapper">
+            <div class="sidebar-content">
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
+                            <strong>David</strong></a>
+                        </span>
+                        <span class="user-role">Administrator</span>
+                        <span class="user-status">
+                            <span data-feather="circle"></span>
+                            <span>Online</span>
+                        </span>
+                    </div>
+                </div>
+             
+
+                <!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <!-- <li class="header-menu">
+                            <span>Employee Tools</span>
+                        </li> -->
+                        <li>
+                           <a href="https://accounts.google.com/signin/v2/sl/pwd?service=CPanel&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
+                                <span data-feather="inbox"></span>
+                                <span>Inbox</span>
+                                <span class="badge badge-pill badge-danger">3 New</span>
+                            </a>
+                       </li>
+                        <li>
+                            <a href="{{ url_for('dashboard.index') }}">
+                                <span data-feather="layout"></span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-feather="clipboard"></span>
+                                <span>Available Jobs</span>
+                                <span class="badge badge-pill badge-primary">98</span>
+                      
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-feather="briefcase"></span>
+                                <span>Claimed Jobs</span><span class="badge badge-pill badge-primary">12</span>
+                      
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="#">
+                                <span data-feather="bar-chart-2"></span>
+                                <span>Analytics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/maps">
+                                 <span data-feather="map"></span>
+                                <span>Live Maps</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/calendar">
+                                <span data-feather="calendar"></span>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/employee_schedule">
+                                <span data-feather="list"></span>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/faq">
+                                 <span data-feather="book"></span>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- sidebar-menu  -->
+            </div>
+            <!-- sidebar-content  -->
+            <div class="sidebar-footer">
+                <a href="#">
+                    <span data-feather="bell"></span>
+                    <span class="badge badge-pill badge-warning notification">3</span>
+                </a>
+                <a href="#">
+                    <span data-feather="mail"></span>
+                    <span class="badge badge-pill badge-success notification">7</span>
+                </a>
+                <a href="#">
+                    <span data-feather="settings"></span>
+                    <span class="badge-sonar"></span>
+                </a>
+                <a href="#">
+                    <i class="fa fa-power-off"></i>
+                </a>
+            </div>
+        </nav>
+        <!-- sidebar-wrapper  -->
+      </div>
+                <!-- sidebar-menu  -->
+         <main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-4">
+  
+
+          <div class="row"> 
+            <div class="col-lg-12">
+
+              {% if g.user %}
+                  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+                  <h4 >Schedule</h4>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    
+                    <div class="btn-group mr-2">
+                      <button class="btn btn-sm btn-outline-secondary">
+                      <span data-feather="calendar"></span>
+                      Schedule
+                    </button>
+                      <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+              {% endif %}
+
+              <div class="cd-schedule loading">
+                <div class="timeline">
+                  <ul>
+                    <li><span>08:00</span></li>
+                    <li><span>08:30</span></li>
+                    <li><span>09:00</span></li>
+                    <li><span>09:30</span></li>
+                    <li><span>10:00</span></li>
+                    <li><span>10:30</span></li>
+                    <li><span>11:00</span></li>
+                    <li><span>11:30</span></li>
+                    <li><span>12:00</span></li>
+                    <li><span>12:30</span></li>
+                    <li><span>01:00</span></li>
+                    <li><span>01:30</span></li>
+                    <li><span>02:00</span></li>
+                    <li><span>02:30</span></li>
+                    <li><span>03:00</span></li>
+                    <li><span>03:30</span></li>
+                    <li><span>04:00</span></li>
+                    <li><span>04:30</span></li>
+                    <li><span>05:00</span></li>
+                  </ul>
+                </div> <!-- .timeline -->
+
+                <div class="events">
+                  <ul>
+                    <li class="events-group">
+                      <div class="top-info"><span>Sunday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="08:00" data-end="10:00" data-content="event-abs-circuit" data-event="event-1">
+                          <a href="#0">
+                            <em class="event-name">Delivery Route</em>
+                          </a>
+                        </li>
+
+                        <li class="single-event" data-start="10:30" data-end="12:30" data-content="event-rowing-workout" data-event="event-2">
+                          <a href="#0">
+                            <em class="event-name">Courier</em>
+                          </a>
+                        </li>
+
+                      </ul>
+                    </li>
+                    <li class="events-group">
+                      <div class="top-info"><span>Monday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="09:30" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+                          <a href="#0">
+                            <em class="event-name">Delivery Route</em>
+                          </a>
+                        </li>
+
+                        <li class="single-event"  data-start="11:00" data-end="12:30" data-content="event-rowing-workout" data-event="event-4">
+                          <a class="event-date-dark" href="#0">
+                            
+                              <span class="badge badge-pill badge-danger btn-block">7 New Jobs</span>
+                          </a>
+                        </li>
+
+                      </ul>
+                    </li>
+
+                    <li class="events-group">
+                      <div class="top-info"><span>Tuesday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+                          <a href="#0">
+                            <em class="event-name">Delivery Route</em>
+                          </a>
+                        </li>
+
+                        <li class="single-event" data-start="11:30" data-end="14:30"  data-content="event-restorative-yoga" data-event="event-4">
+                          <a href="#0">
+                            <em class="event-name"></em>
+                             <span class="badge badge-pill badge-danger btn-block">4 New Jobs</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="events-group">
+                      <div class="top-info"><span>Wednesday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
+                          <a href="#0">
+                            <span class="badge badge-pill badge-danger btn-block">6 New Jobs</span>
+
+                          </a>
+                        </li>
+
+                        <li class="single-event" data-start="10:45" data-end="12:45" data-content="event-yoga-1" data-event="event-1">
+                          <a href="#0">
+                            <em class="event-name">Courier Delivery</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="events-group">
+                      <div class="top-info"><span>Thursday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="08:00" data-end="10:30" data-content="event-abs-circuit" data-event="event-1">
+                          <a href="#0">
+                            <em class="event-name">Handler</em>
+                          </a>
+                        </li>
+
+                        <li class="single-event" data-start="11:00" data-end="12:00" data-content="event-restorative-yoga" data-event="event-4">
+                          <a href="#0">
+                            <em class="event-name"></em>
+                            <span class="badge badge-pill badge-danger btn-block">2 New Jobs</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li class="events-group">
+                      <div class="top-info"><span>Friday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="10:00" data-end="11:00"  data-content="event-rowing-workout" data-event="event-2">
+                          <a href="#0">
+                            <em class="event-name">Handler</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+
+
+                    <li class="events-group">
+                      <div class="top-info"><span>Saturday</span></div>
+
+                      <ul>
+                        <li class="single-event" data-start="9:00" data-end="10:00"  data-content="event-rowing-workout" data-event="event-2">
+                          <a href="#0">
+                            <em class="event-name">Handler</em>
+                          </a>
+                        </li>
+
+                         <li class="single-event" data-start="15:00" data-end="17:00"  data-content="event-rowing-workout" data-event="event-2">
+                          <a href="#0">
+                            <em class="event-name">Handler</em>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="event-modal">
+                  <header class="header">
+                    <div class="content">
+                      <span class="event-date"></span>
+                      <h3 class="event-name"></h3>
+                    </div>
+
+                    <div class="header-bg"></div>
+                  </header>
+
+                  <div class="body">
+                    <div class="event-info"></div>
+                    <div class="body-bg">
+                        
+
+                    </div>
+                  </div>
+
+                  <a href="#0" class="close">Close</a>
+                </div>
+
+                <div class="cover-layer"></div>
+              </div> <!-- .cd-schedule -->
+       </div> <!-- End of row -->
+
+        </main>
+      </div>
+      </div>
+    </div>
+  
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <script type="text/javascript">
+      
+      $(document).ready(function(e){
+          $('.search-panel .dropdown-menu').find('a').click(function(e) {
+          e.preventDefault();
+          var param = $(this).attr("href").replace("#","");
+          var concept = $(this).text();
+          $('.search-panel span#search_concept').text(concept);
+          $('.input-group #search_param').val(param);
+        });
+      });
+    </script>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+          // The location of Uluru
+          var uluru = {lat: 33.45, lng: -88.81};
+          // The map, centered at Uluru
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 10, center: uluru});
+          // The marker, positioned at Uluru
+          var marker = new google.maps.Marker({position: uluru, map: map});
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3xgRhqhD3SevqR4b5DtJ-gau7bVB4tvI&callback=initMap">
+    </script>
+    <script src="{{ url_for('static', filename='js/schedule.js') }}"></script> <!-- Resource jQuery -->
+
+
+{% endblock %}
