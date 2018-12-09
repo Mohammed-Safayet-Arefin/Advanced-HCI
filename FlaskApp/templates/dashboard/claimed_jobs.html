@@ -29,10 +29,11 @@
                         <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">
-                          {{ session['username']}}
+                        <span class="user-name">
+                          <a href="{{ url_for('dashboard.user_profile') }}">
+                          {{session['username']}}
                         </span>
-                        <span class="user-role">Flexible Worker</span> <br>
+                        <span class="user-role">Flexible Worker</span><br>
                         <span class="user-status">
                             <span class="onlineIcon" data-feather="circle"></span>
                             <span>Online</span>
@@ -67,7 +68,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url_for('dashboard.claimed_jobs', e_id=session['u_id']) }}">
+                            <a href="{{ url_for('dashboard.claimed_jobs', e_id=session['u_id'])}}">
                                 <span data-feather="briefcase"></span>
                                 <span>Claimed Jobs</span><span class="badge badge-pill badge-primary">12</span>
                             </a>
@@ -129,7 +130,7 @@
             <div class="col-lg-8 col-md-12 col-sm-12">
 
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h4>Available Jobs</h4>
+                  <h4>{{session['username']}}'s Claimed Jobs</h4>
             </div>
            
 
@@ -166,12 +167,10 @@
                       <th>Job ID</th>
                       <th>Title</th>
                       <th>Location</th>
-                      <th>Date/Time</th>
+                      <th>Start Time</th>
+                      <th>End Time</th>
                       <th>Qualifications</th>
-                      <th>Avail. Jobs</th>
-                      {% if g.user %}
-                        <th>Claim</th>
-                      {% endif %}
+                      <th>Return Job<th>
                     </tr>
                   </thead>
                   <tbody>
@@ -182,11 +181,10 @@
                         <td>{{ job['job_title'] }}</td>
                         <!-- <td>{{ job['job_desc'] }}</td> -->
                         <td>{{ job['job_city']}}, {{job['job_state']}}</td>
-                        <td>{{ job['created'].strftime('%Y-%m-%d') }}</td>
+                        <td>{{ job['job_time_beg']}}</td>
+                        <td>{{ job['job_time_end']}}</td>
                         <td><button class="btn btn-sm btn-dark qualification-tags">{{job['job_credentials']}}</button></td>
-                        <td>{{ job['job_extra'] }}</td>
-                        <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                        
+                        <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" onclick="return confirm('Are you sure you want to return job to jobs Queue? You will no longer be scheduled for this job.')">Return</button></td>
                       </tr>
                     {% endfor %}
 
@@ -194,12 +192,13 @@
                       <td>1000</td>
                       <td>Courier Delivery</td>
                       <td>Jackson, MS</td>
-                      <td>2018-11-06</td>
+                      <td>15:00</td>
+                      <td>18:00</td>
                       <td>
                           <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
                           <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button></td>
-                      <td><span class="avail-jobs">07</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
+                    
+                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Return</button></td>
                     </tr>
 
                     <tr >
@@ -217,7 +216,7 @@
                                     <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
                                     <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
                                     </p>
-                                  <button type="button" class="btn btn-sm btn-info claim-btn" data-toggle="modal" data-target="#exampleModal">Claim</button>
+                                  <button type="button" class="btn btn-sm btn-info claim-btn" data-toggle="modal" data-target="#exampleModal">Return</button>
                                   </div>
 
                               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -270,13 +269,13 @@
                        <td>1000</td>
                       <td>Handler</td>
                       <td>Starkville, MS</td>
-                      <td>2018-11-08</td>
+                      <td>09:00</td>
+                      <td>12:00</td>
                       <td>
                           <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
                       </td>
-                       <td><span class="avail-jobs">03</span></td>
-
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
+                       
+                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Return</button></td>
                     </tr>
 
                     <tr >
@@ -293,7 +292,7 @@
                                    <p><strong>Qualification Requirements</strong><br>
                                      <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
                                     </p>
-                                  <button class="btn btn-sm btn-info claim-btn">Claim</button>
+                                  <button class="btn btn-sm btn-info claim-btn">Return</button>
                                   </div>
 
                               <div class="col-lg-8">
@@ -306,129 +305,6 @@
                         </div>
                       </div>
                       </td>
-                    </tr>
-                    <tr>
-                      <td>1,001</td>
-                      <td>Package Handler</td>
-                      <td>Memphis, TN</td>
-                      <td>2018-11-09</td>
-                      <td> <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button></td>
-                      <td><span class="avail-jobs">22</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,002</td>
-                      <td>amet</td>
-                      <td>consectetur</td>
-                      <td>adipiscing</td>
-                      <td> 
-                        <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
-                        <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
-                      </td>
-                      <td><span class="avail-jobs">01</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,003</td>
-                      <td>Integer</td>
-                      <td>nec</td>
-                      <td>odio</td>
-                      <td> 
-                        <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
-                        <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
-                      </td>
-                     <td><span class="avail-jobs">11  </span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,003</td>
-                      <td>libero</td>
-                      <td>Sed</td>
-                      <td>cursus</td>
-                      <td><button class="btn btn-sm btn-dark qualification-tags">Qualification</button></td>
-                      <td><span class="avail-jobs">22</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,004</td>
-                      <td>dapibus</td>
-                      <td>diam</td>
-                      <td>Sed</td>
-                      <td><button class="btn btn-sm btn-dark qualification-tags">Qualification</button></td>
-                      <td><span class="avail-jobs">09</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,005</td>
-                      <td>Nulla</td>
-                      <td>quis</td>
-                      <td>sem</td>
-                      <td><button class="btn btn-sm btn-dark qualification-tags">Qualification</button></td>
-                      <td><span class="avail-jobs">11</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,006</td>
-                      <td>nibh</td>
-                      <td>elementum</td>
-                      <td>imperdiet</td>
-                      <td><button class="btn btn-sm btn-dark qualification-tags">Qualification</button></td>
-                      <td><span class="avail-jobs">17</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,007</td>
-                      <td>sagittis</td>
-                      <td>ipsum</td>
-                      <td>Praesent</td>
-                      <td><button class="btn btn-sm btn-dark qualification-tags">Qualification</button></td>
-                      <td><span class="avail-jobs">19</span></td>
-                     <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,008</td>
-                      <td>Fusce</td>
-                      <td>nec</td>
-                      <td>tellus</td>
-                      <td><button class="btn btn-sm btn-dark qualification-tags">Qualification</button></td>
-                      <td><span class="avail-jobs">02</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,009</td>
-                      <td>augue</td>
-                      <td>semper</td>
-                      <td>porta</td>
-                      <td>Mauris</td>
-                      <td><span class="avail-jobs">22</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,010</td>
-                      <td>massa</td>
-                      <td>Vestibulum</td>
-                      <td>lacinia</td>
-                      <td>arcu</td>
-                      <td><span class="avail-jobs">22</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,011</td>
-                      <td>eget</td>
-                      <td>nulla</td>
-                      <td>Class</td>
-                      <td>aptent</td>
-                      <td><span class="avail-jobs">22</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
-                    </tr>
-                    <tr>
-                      <td>1,012</td>
-                      <td>taciti</td>
-                      <td>sociosqu</td>
-                      <td>ad</td>
-                      <td>litora</td>
-                      <td><span class="avail-jobs">22</span></td>
-                      <td><button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
                     </tr>
                   </tbody></table>
               </div>

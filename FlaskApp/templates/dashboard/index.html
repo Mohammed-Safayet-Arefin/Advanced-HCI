@@ -60,15 +60,15 @@
                         </li>
 
                         <li>
-                            <a href="url_for('dashboard.available_jobs')">
+                            <a href="{{ url_for('dashboard.available_jobs')}}">
                                 <span data-feather="clipboard"></span>
                                 <span>Available Jobs</span>
                                 <span class="badge badge-pill badge-primary">98</span>
-                      
                             </a>
+
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ url_for('dashboard.claimed_jobs', e_id=session['u_id'])}}">
                                 <span data-feather="briefcase"></span>
                                 <span>Claimed Jobs</span><span class="badge badge-pill badge-primary">12</span>
                             </a>
@@ -350,8 +350,10 @@
                         <td>{{ job['created'].strftime('%Y-%m-%d') }}</td>
                         <td><button class="btn btn-sm btn-dark qualification-tags">{{job['job_credentials']}}</button></td>
                         <td>{{ job['job_extra'] }}</td>
-                        <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button>
-
+                        <td> 
+                          <form action="{{ url_for('dashboard.claim', j_id=job['job_id'], e_id=session['u_id']) }}" method="post">
+                              <input class="btn btn-sm btn-outline-danger" type="submit" value="Claim" onclick="return confirm('Are you sure?');">
+                         </form>
                             <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog" role="document">
