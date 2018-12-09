@@ -109,18 +109,20 @@ def claimed_jobs(e_id):
         (e_id,)
     ).fetchone()
 
-    claimed_jobs = user['claimed_jobs'].split(',')
-    print(claimed_jobs)
+    if user['claimed_jobs'] != None:
+        claimed_jobs = user['claimed_jobs'].split(',')
+        print(claimed_jobs)
 
-    jobs = []
-    for i in claimed_jobs:
-        job = get_job(i)
-        print(job['job_title'])
-        jobs.append(job)
+        jobs = []
+        for i in claimed_jobs:
+            job = get_job(i)
+            print(job['job_title'])
+            jobs.append(job)
 
-        print(jobs[0])
+            print(jobs[0])
+    else:
+        jobs = []
 
-    # print(jobs)
 
     return render_template('dashboard/claimed_jobs.html', jobs=jobs)
 
