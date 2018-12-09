@@ -136,14 +136,14 @@
 
                 <hr>
                 <div class="dropdown float-right">
-                  <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <!-- <button class="btn btn-sm btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Use Template
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Template A</a>
                     <a class="dropdown-item" href="#">Template B</a>
                     <a class="dropdown-item" href="#">Template C</a>
-                  </div>
+                  </div> -->
                   <div class="float-right"><input class=" btn btn-sm btn-outline-info" type="submit" value="Save"></div>
                 </div>
 
@@ -288,13 +288,12 @@
                   <div class="form-group col-md-6">
                     <div class="float-right">
                       <input class=" btn btn-sm btn-outline-info" type="submit" value="Save">
-                      <input class=" btn btn-sm btn-info" type="submit" value="Publish">
+                      <input class=" btn btn-sm btn-info" type="submit" value="Publish" onclick="return confirm('Confirm Job Publication?')">
                     </div>
                   </div>
 
                 </div>
                 </form>
-
 
 
                <form action="{{ url_for('dashboard.delete', id=job['job_id']) }}" method="post">

@@ -18,7 +18,8 @@ a:hover{
 .edit-btn  { padding: .2rem .825rem; }
 .new-job a { color: #fff; }
 
-td > .btn-outline-primary{
+td > .btn-outline-primary, 
+td > .btn-outline-primary a {
   color: #443453;
   border-color: #443453;;
 }

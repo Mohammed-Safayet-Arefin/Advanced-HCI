@@ -171,8 +171,8 @@ def create(id=None):
                 (title, body, qualifications, begin_date, end_date,
                  begin_time, end_time, job_city, job_state, job_zip, 1)
             )
-            print(title, body, qualifications, begin_date, end_date,
-                  begin_time, end_time, job_city, job_state, job_zip, 1)
+            # print(title, body, qualifications, begin_date, end_date,
+            #       begin_time, end_time, job_city, job_state, job_zip, 1)
             db.commit()
 
             return redirect(url_for('dashboard.manager_dashboard'))
