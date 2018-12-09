@@ -282,40 +282,23 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <a class="btn btn-sm btn-outline-secondary" href="/" role="button">Cancel</a>
-                    
                   </div>
 
                   <div class="form-group col-md-6">
                     <div class="float-right">
-                      <input class=" btn btn-sm btn-outline-info" type="submit" value="Save">
+                      <input class=" btn btn-sm btn-outline-info" type="submit" value="Save" onclick="return confirm('Save Job as Draft?')">
                       <input class=" btn btn-sm btn-info" type="submit" value="Publish" onclick="return confirm('Confirm Job Publication?')">
                     </div>
                   </div>
-
                 </div>
+
                 </form>
-
-
-               <form action="{{ url_for('dashboard.delete', id=job['job_id']) }}" method="post">
-                <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-              </form>
+                <hr>
+                 <form action="{{ url_for('dashboard.delete', id=job['job_id']) }}" method="post">
+                      <input class="btn btn-sm btn-block btn-outline-danger danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+                 </form>
+               
             </div>
-
-
-<!-- 
-          <form method="post">
-            <label for="job_title">Title</label>
-            <input name="job_title" id="job_title"
-              value="{{ request.form['job_title'] or job['job_title'] }}" required>
-            <label for="job_desc">Body</label>
-            <textarea name="job_desc" id="job_desc">{{ request.form['job_desc'] or job['job_desc'] }}</textarea>
-            <input type="submit" value="Save">
-          </form>
-          <hr>
-          <form action="{{ url_for('dashboard.delete', id=job['job_id']) }}" method="post">
-            <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-          </form> -->
-
 
         </main>
       </div>

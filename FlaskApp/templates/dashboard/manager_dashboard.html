@@ -26,10 +26,8 @@
                         <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name">Scarlett
-                            <strong>Ordway</strong>
-                        </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-name">{{ g.user['m_fullname'] }}</span>
+                        <span class="user-role">Regional Manager</span>
                         <span class="user-status">
                             <span class="onlineIcon" data-feather="circle"></span>
                             <span>Online</span>
@@ -464,22 +462,22 @@
                     {% if notification['type'] == "manager" %}
 
                       {% if notification['priority'] == "info" %}
-                        <p class="card-text alert alert-info text"> <span class="featherIcon" data-feather="info" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-info text"> <span class="featherIcon" data-feather="info" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
 
 
                       {% if notification['priority'] == "alert" %}
-                        <p class="card-text alert alert-danger text"> <span class="featherIcon" data-feather="alert-triangle" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-danger text"> <span class="featherIcon" data-feather="alert-triangle" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
 
 
                       {% if notification['priority'] == "warning" %}
-                        <p class="card-text alert alert-warning text"> <span class="featherIcon" data-feather="alert-octagon" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-warning text"> <span class="featherIcon" data-feather="alert-octagon" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
 
 
                       {% if notification['priority'] == "success" %}
-                        <p class="card-text alert alert-success text"> <span class="featherIcon" data-feather="check-circle" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-success text"> <span class="featherIcon" data-feather="check-circle" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
                     
                     {% endif %} 

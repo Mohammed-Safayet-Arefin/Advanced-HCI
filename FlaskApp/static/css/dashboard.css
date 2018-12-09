@@ -1,13 +1,10 @@
-
 h4 {
   font-size: 1.6em;
   text-transform: uppercase;
   color: #222;
 }
 
-a:hover{
-  text-decoration: none;
-}
+a:hover{ text-decoration: none; }
 
 .btn a {color: #fff; }
 .btn a:hover {
@@ -112,10 +109,6 @@ td > .btn-outline-primary:hover{
 
 
 /*Schedule Styles */
-
-
-
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -194,7 +187,7 @@ td > .btn-outline-primary:hover{
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid #577F92;
+  border: 5px solid #78a6bc;
   background-color: rgb(87,127,146,0.05);
   color: #577F92;
 }

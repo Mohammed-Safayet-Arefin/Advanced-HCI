@@ -34,15 +34,15 @@ def index():
 
     # EMPLOYEES
     db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-               ('employee', 'New Delivery Job Posted! ', 'info', '2018-01-01 00:00:00'))
+               ('employee', 'New Delivery Job Posted! ', 'info', '2018-01-01 09:01:17'))
     db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-               ('employee', 'Reminder: Delivery Job # is scheduled for today.', 'alert', '2018-01-01 00:00:00'))
+               ('employee', 'Reminder: Delivery Job # is scheduled for today.', 'alert', '2018-01-01 09:01:22'))
     db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-               ('employee', 'You have not scheduled any jobs for this week.', 'warning', '2018-01-01 00:00:00'))
+               ('employee', 'You have not scheduled any jobs for this week.', 'warning', '2018-01-01 10:02:09'))
     db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-               ('employee', 'Job # was successfully added to your schedule.', 'success', '2018-01-01 00:00:00'))
+               ('employee', 'Job # was successfully added to your schedule.', 'success', '2018-01-01 10:12:12'))
     db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-               ('employee', 'Scheduled Job # was cancelled!', 'alert', '2018-01-01 00:00:00'))
+               ('employee', 'Scheduled Job # was cancelled!', 'alert', '2018-01-01 11:02:43'))
 
     db.commit()
 
@@ -69,13 +69,13 @@ def manager_dashboard():
     # MANAGERS
     if addNotifications:
         db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-                   ('manager', 'Joe David accepted Delivery Job #.', 'info', '2018-01-01 00:00:00'))
+                   ('manager', 'Joe David accepted Delivery Job #.', 'info', '2018-01-01 01:07:03'))
         db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-                   ('manager', '2 Jobs scheduled for today are without employees.', 'alert', '2018-01-01 00:00:00'))
+                   ('manager', '2 Jobs scheduled for today are without employees.', 'alert', '2018-01-01 12:12:22'))
         db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-                   ('manager', '3 Jobs for tomorrow are without employees.', 'warning', '2018-01-01 00:00:00'))
+                   ('manager', '3 Jobs for tomorrow are without employees.', 'warning', '2018-01-01 01:12:54'))
         db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
-                   ('manager', 'All scheduled jobs for today were successfully assigned.', 'success', '2018-01-01 00:00:00'))
+                   ('manager', 'All scheduled jobs for today were successfully assigned.', 'success', '2018-01-01 02:01:01'))
         db.commit()
         addNotifications = False
 

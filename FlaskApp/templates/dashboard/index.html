@@ -29,10 +29,10 @@
                         <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                     </div>
                     <div class="user-info">
-                        <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
-                            <strong>David</strong></a>
+                        <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}"> 
+                          {{ g.user['e_fullname']}}
                         </span>
-                        <span class="user-role">Administrator</span>
+                        <span class="user-role">Flexible Worker</span><br>
                         <span class="user-status">
                             <span class="onlineIcon" data-feather="circle"></span>
                             <span>Online</span>
@@ -45,20 +45,22 @@
                 <div class="sidebar-menu">
                     <ul>
                         <li>
-                           <a href="https://accounts.google.com/signin/v2/sl/pwd?service=CPanel&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
-                                <span data-feather="inbox"></span>
-                                <span>Inbox</span>
-                                <span class="badge badge-pill badge-danger">3 New</span>
-                            </a>
-                       </li>
-                        <li>
                             <a href="{{ url_for('dashboard.index') }}">
                                 <span data-feather="layout"></span>
                                 <span>Dashboard</span>
                             </a>
                         </li>
+
                         <li>
-                            <a href="/available_jobs">
+                           <a href="https://accounts.google.com/signin/v2/sl/pwd?service=CPanel&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
+                                <span data-feather="inbox"></span>
+                                <span>Inbox</span>
+                                <span class="badge badge-pill badge-danger">3 New</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="url_for('dashboard.available_jobs')">
                                 <span data-feather="clipboard"></span>
                                 <span>Available Jobs</span>
                                 <span class="badge badge-pill badge-primary">98</span>
@@ -101,15 +103,15 @@
             </div>
             <!-- sidebar-content  -->
             <div class="sidebar-footer">
-                <a href="#">
+                <a href="{{ url_for('dashboard.index') }}">
                     <span data-feather="bell"></span>
                     <span class="badge badge-pill badge-warning notification">3</span>
                 </a>
-                <a href="#">
+                <a href="https://accounts.google.com/signin/v2/sl/pwd?service=CPanel&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
                     <span data-feather="mail"></span>
                     <span class="badge badge-pill badge-success notification">7</span>
                 </a>
-                <a href="#">
+                <a href="{{ url_for('dashboard.user_profile') }}">
                     <span data-feather="settings"></span>
                     <span class="badge-sonar"></span>
                 </a>
@@ -128,6 +130,7 @@
             <div class="col-lg-8 col-md-12 col-sm-12">
 
               {% if g.user %}
+
                   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
                   <h4 >Schedule</h4>
                   <div class="btn-toolbar mb-2 mb-md-0">
@@ -197,7 +200,7 @@
                           </a>
                         </li>
                         <li class="single-event" data-start="11:30" data-end="12:30"  data-content="event-restorative-yoga" data-event="event-4">
-                          <a href="#0">
+                          <a class="darktime" href="#0">
                             <em class="event-name"></em>
                              <span class="badge badge-pill badge-danger btn-block">4 Jobs</span>
                           </a>
@@ -209,7 +212,7 @@
 
                       <ul>
                         <li class="single-event" data-start="09:00" data-end="10:15" data-content="event-restorative-yoga" data-event="event-4">
-                          <a href="#0">
+                          <a class="darktime" href="#0">
                              <span class="badge badge-pill badge-danger btn-block">4 Jobs</span>
                             <em class="event-name"></em>
                           </a>
@@ -231,7 +234,7 @@
                           </a>
                         </li>
                         <li class="single-event" data-start="11:00" data-end="12:00" data-content="event-restorative-yoga" data-event="event-4">
-                          <a href="#0">
+                          <a class="darktime" href="#0">
                             <em class="event-name"></em>
                              <span class="badge badge-pill badge-danger btn-block">2 Jobs</span>
                           </a>
@@ -647,45 +650,28 @@
                     {% if notification['type'] == "employee" %}
 
                       {% if notification['priority'] == "info" %}
-                        <p class="card-text alert alert-info text"> <span class="featherIcon" data-feather="info" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-info text"> <span class="featherIcon" data-feather="info" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
 
 
                       {% if notification['priority'] == "alert" %}
-                        <p class="card-text alert alert-danger text"> <span class="featherIcon" data-feather="alert-triangle" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-danger text"> <span class="featherIcon" data-feather="alert-triangle" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
 
 
                       {% if notification['priority'] == "warning" %}
-                        <p class="card-text alert alert-warning text"> <span class="featherIcon" data-feather="alert-octagon" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-warning text"> <span class="featherIcon" data-feather="alert-octagon" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
 
 
                       {% if notification['priority'] == "success" %}
-                        <p class="card-text alert alert-success text"> <span class="featherIcon" data-feather="check-circle" aria-hidden="true"></span> {{ notification['message'] }} </p>
+                        <p class="card-text alert alert-success text"> <span class="featherIcon" data-feather="check-circle" aria-hidden="true"></span> {{ notification['created'].strftime('%H:%M') }} {{ notification['message'] }} </p>
                       {% endif %} 
                     
                     {% endif %} 
                 {% endfor %}
               </div>
-
-
-              <!-- <div class="card-body">
-                <p class="card-text"><span data-feather="alert-circle"></span> Notification Alert Text. 12 New Delivery Job Posted in the last hour.</p>
-                <hr>
-                <p class="card-text"><span data-feather="alert-triangle"></span> Notification Alert Text. Joe David, Accepted a Delivery Job for 9am - 12am in Denver, Colorado. </p>
-                <hr>
-                <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text. 9 New Delivery Job that fit your requested schedule were posted </p>
-                <hr>
-                <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text.  Joe David, Accepted a Delivery Job for 9am - 12am in Denver, Colorado.  </p>
-                <hr>
-                <p class="card-text"> <span data-feather="check-circle"></span>  Notification Alert Text. 9 New Delivery Job that fit your requested schedule were posted </p>
-
-              </div> -->
             </div>
-
-          <!-- <hr> -->
-
           <hr>
           
           <!-- Employee Metrics -->
@@ -697,7 +683,7 @@
                 </div>
             </div>
             <div class="col-6"> 
-              <a href="{{ url_for('dashboard.user_schedule')}}">
+              <a href="{{ url_for('dashboard.user_schedule')}}">  
               <div class="metrics metrics-purple">
                 <p><span class="metrics-nums">32</span> <br> Hours<br>Scheduled</p>
               </div>
@@ -713,7 +699,7 @@
             </div>
             <div class="col-6">
               <div class="metrics metrics-blue">
-                <p><span class="metrics-nums">100 %</span> <br> Puncuality</p>
+                <p><span class="metrics-nums">100 %</span> <br> Punctuality</p>
               </div>
             </div>
           </div>
