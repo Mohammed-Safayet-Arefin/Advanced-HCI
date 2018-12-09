@@ -18,6 +18,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         error = None
+        isManager = False
 
         if not username or not password or not u_id:
             error = "Please provide valid information"
@@ -29,9 +30,18 @@ def register():
             error = "Username is already taken"
             flash(error)
 
-        if error is None:
+        if error is None and isManager == False:
             db.execute(
                 'INSERT INTO Employee (e_id, e_username, e_password) VALUES (?, ? , ?)',
+                (u_id, username, generate_password_hash(password))
+            )
+            db.commit()
+            return redirect(url_for('auth.login'))
+
+        # Temporarily insert manager and password into database
+        if error is None and isManager == True:
+            db.execute(
+                'INSERT INTO Manager (m_id, m_username, m_password) VALUES (?, ? , ?)',
                 (u_id, username, generate_password_hash(password))
             )
             db.commit()
@@ -76,11 +86,13 @@ def login():
         if user_m_check is not None:
             user = user_m_check
             u_id = user_m_check['m_id']
+            u_name = user_m_check['m_fullname']
             isManager = True
 
         elif user_e_check is not None:
             user = user_e_check
             u_id = user_e_check['e_id']
+            u_name = user_e_check['e_fullname']
             isManager = False
 
         elif user_m_check is None and user_e_check is None:
@@ -100,6 +112,8 @@ def login():
             session['u_id'] = u_id
             session['username'] = username
             session['isManager'] = isManager
+            session['name'] = u_name
+
             print("isManager:", isManager)
 
             if isManager:
@@ -117,9 +131,11 @@ def load_logged_in_user():
     u_id = session.get('u_id')
     username = session.get('username')
     isManager = session.get('isManager')
+    u_name = session.get('name')
     print("u_id: ", u_id)
     print("Username: ", username)
     print("Manager: ", isManager)
+    print('Fullname:', u_name)
 
     if u_id is None:
         g.user = None

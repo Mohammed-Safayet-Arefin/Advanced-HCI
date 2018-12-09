@@ -19,6 +19,8 @@ Primary style
   list-style: none;
 }
 
+.darktime span.event-date { color: #222; }
+
 /*a {
   color: #A2B9B2;
   text-decoration: none;

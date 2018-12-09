@@ -1,10 +1,9 @@
 
 /*All CSS styles for create job page */
 
-.new-job a, .btn a{
-  color: #fff;
-}
 
+main { margin-bottom: 200px; }
+.new-job a, .btn a { color: #fff; }
 
 .dashboard-body {
   font-size: .75rem;

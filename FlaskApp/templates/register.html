@@ -3,6 +3,7 @@
 {% block header %}
     <!-- Custom Styles for Register Page -->
    <link href="{{ url_for('static', filename='css/register.css') }}" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -30,6 +31,7 @@
 
       
       <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <span class="psw">  <a class="nav-link" href="{{ url_for('auth.login') }}">Already Registered?</a></span>
       <p class="mt-5 mb-3 text-muted">Flexible Worker &copy; 2018</p>
     </form>
 </div>

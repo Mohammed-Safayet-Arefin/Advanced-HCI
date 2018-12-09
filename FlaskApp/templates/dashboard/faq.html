@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+    <h1>{% block title %}Profile{% endblock %}</h1>
+
+    <link href="{{ url_for('static', filename='css/profile.css') }}" rel="stylesheet">
+     <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+{% endblock %}
+
+{% block content %}
+
+<!-- Icons -->
+<div class="container-fluid">
+<div class="dashboard-body">
+  <div class="row">
+  <div class="page-wrapper chiller-theme toggled">
+          <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+              <i class="fas fa-bars"></i>
+          </a>
+          <nav id="sidebar" class="col-md-2 col-lg-2 d-md-block sidebar-wrapper">
+              <div class="sidebar-content">
+                  <div class="sidebar-header">
+                      <div class="user-pic">
+                         <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
+                      </div>
+                      <div class="user-info">
+                          <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
+                              <strong>David</strong></a>
+                          </span>
+                          <span class="user-role">Administrator</span>
+                          <span class="user-status">
+                              <span data-feather="circle"></span>
+                              <span>Online</span>
+                          </span>
+                      </div>
+                  </div>
+               
+
+                  <!-- sidebar-search  -->
+                        <!-- sidebar-search  -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li>
+                           <a href="https://accounts.google.com/signin/v2/sl/pwd?service=CPanel&flowName=GlifWebSignIn&flowEntry=ServiceLogin">
+                                <span data-feather="inbox"></span>
+                                <span>Inbox</span>
+                                <span class="badge badge-pill badge-danger">3 New</span>
+                            </a>
+                       </li>
+                        <li>
+                            <a href="{{ url_for('dashboard.index') }}">
+                                <span data-feather="layout"></span>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('dashboard.available_jobs') }}">
+                                <span data-feather="clipboard"></span>
+                                <span>Available Jobs</span>
+                                <span class="badge badge-pill badge-primary">98</span>
+                      
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <span data-feather="briefcase"></span>
+                                <span>Claimed Jobs</span><span class="badge badge-pill badge-primary">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/maps">
+                                 <span data-feather="map"></span>
+                                <span>Live Maps</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/calendar">
+                                <span data-feather="calendar"></span>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('dashboard.user_schedule') }}">
+                                <span data-feather="list"></span>
+                                <span>Schedule</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('dashboard.documentation') }}">
+                                 <span data-feather="book"></span>
+                                <span>Documentation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+          </div>
+
+         <!-- sidebar-menu  -->
+        <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+    		<p>No Documentation Info yet</p>
+        </main>
+  </div>
+</div>
+</div>
+
+
+<!-- Icons -->
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+
+{% endblock %}

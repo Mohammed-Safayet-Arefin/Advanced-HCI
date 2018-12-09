@@ -1,13 +1,10 @@
-
 h4 {
   font-size: 1.6em;
   text-transform: uppercase;
   color: #222;
 }
 
-a:hover{
-  text-decoration: none;
-}
+a:hover{ text-decoration: none; }
 
 .btn a {color: #fff; }
 .btn a:hover {
@@ -18,7 +15,8 @@ a:hover{
 .edit-btn  { padding: .2rem .825rem; }
 .new-job a { color: #fff; }
 
-td > .btn-outline-primary{
+td > .btn-outline-primary, 
+td > .btn-outline-primary a {
   color: #443453;
   border-color: #443453;;
 }
@@ -43,11 +41,11 @@ td > .btn-outline-primary:hover{
   width: 60px;
 } 
 
-/*.feather {
+.feather {
   width: 16px;
   height: 16px;
   vertical-align: text-bottom;
-}*/
+}
 
 .ico_help {
   margin: 5px 0px 10px 5px;
@@ -111,10 +109,6 @@ td > .btn-outline-primary:hover{
 
 
 /*Schedule Styles */
-
-
-
-
 .sidebar {
   position: fixed;
   top: 0;
@@ -193,7 +187,7 @@ td > .btn-outline-primary:hover{
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid #577F92;
+  border: 5px solid #78a6bc;
   background-color: rgb(87,127,146,0.05);
   color: #577F92;
 }
@@ -218,12 +212,6 @@ td > .btn-outline-primary:hover{
 
 
 /*Top Performers */
-.user-name a{
-  color: #fff;
-  font-size: 1.35em;
-}
-
-
 /*
  * Navbar
  */
@@ -269,7 +257,7 @@ td > .btn-outline-primary:hover{
 
 /*NOTIFICATIONS*/
 
-.featherIcon {
+.notification > .featherIcon {
   width: 2.3em;
   height: 2.3em;
   stroke-width: 2;
