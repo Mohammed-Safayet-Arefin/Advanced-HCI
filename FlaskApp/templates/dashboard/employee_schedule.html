@@ -6,6 +6,7 @@
   <link href="{{ url_for('static', filename='css/schedule.css') }}"  rel="stylesheet"> <!-- style for worker schedule-->
    <link href="{{ url_for('static', filename='css/schedule-main.css') }}"  rel="stylesheet">
   <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
+
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <!-- <h1>{% block title %}Jobs{% endblock %}</h1> -->
   <!-- {% if g.user %}
@@ -35,7 +36,7 @@
                         </span>
                         <span class="user-role">Administrator</span>
                         <span class="user-status">
-                            <span data-feather="circle"></span>
+                            <span class="onlineIcon" data-feather="circle"></span>
                             <span>Online</span>
                         </span>
                     </div>
@@ -62,7 +63,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ url_for('dashboard.available_jobs')}}">
                                 <span data-feather="clipboard"></span>
                                 <span>Available Jobs</span>
                                 <span class="badge badge-pill badge-primary">98</span>
@@ -74,13 +75,6 @@
                                 <span data-feather="briefcase"></span>
                                 <span>Claimed Jobs</span><span class="badge badge-pill badge-primary">12</span>
                       
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="#">
-                                <span data-feather="bar-chart-2"></span>
-                                <span>Analytics</span>
                             </a>
                         </li>
                         <li>
@@ -96,13 +90,13 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/employee_schedule">
+                            <a href="{{ url_for('dashboard.user_schedule')}}">
                                 <span data-feather="list"></span>
                                 <span>Schedule</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/faq">
+                            <a href="{{ url_for('dashboard.documentation') }}">
                                  <span data-feather="book"></span>
                                 <span>Documentation</span>
                             </a>

@@ -515,6 +515,16 @@ body {
     background-color: transparent;
 }
 
+.onlineIcon{
+  fill: green;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.user-name a {
+  color: #fff;
+  font-size: 1.35em;
+}
 
 @media only screen and (max-width: 1024px){
   .page-wrapper {

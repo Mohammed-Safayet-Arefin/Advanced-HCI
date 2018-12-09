@@ -364,7 +364,7 @@
               <div class="sidebar-content">
                   <div class="sidebar-header">
                       <div class="user-pic">
-                          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg" alt="User picture">
+                         <img class="img-responsive img-rounded" src="{{ url_for('static', filename='images/user_avatar.jpg') }}" alt="User picture">
                       </div>
                       <div class="user-info">
                           <span class="user-name"><a href="{{ url_for('dashboard.user_profile') }}">Joe
@@ -372,9 +372,9 @@
                           </span>
                           <span class="user-role">Administrator</span>
                           <span class="user-status">
-                              <span data-feather="circle"></span>
-                              <span>Online</span>
-                          </span>
+                            <span class="onlineIcon" data-feather="circle"></span>
+                            <span>Online</span>
+                        </span>
                       </div>
                   </div>
                
@@ -382,9 +382,6 @@
                   <!-- sidebar-search  -->
                   <div class="sidebar-menu">
                       <ul>
-                          <li class="header-menu">
-                              <span>Employee Tools</span>
-                          </li>
                           <li>
                              <a href="#">
                                   <span data-feather="inbox"></span>
@@ -397,7 +394,7 @@
                               </a>
                           </li>
                           <li>
-                              <a href="#">
+                              <a href="{{ url_for('dashboard.available_jobs')}}">
                                   <span data-feather="users"></span>
                                   <span>Available Jobs</span>
                                   <span class="badge badge-pill badge-primary">3</span>
@@ -405,32 +402,26 @@
                               </a>
                           </li>
                           
+                      	<li>
+                            <a href="https://www.google.com/maps">
+                                 <span data-feather="map"></span>
+                                <span>Live Maps</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com/calendar">
+                                <span data-feather="calendar"></span>
+                                <span>Calendar</span>
+                            </a>
+                        </li>
                           <li>
-                              <a href="#">
-                                  <span data-feather="bar-chart-2"></span>
-                                  <span>Analytics</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#">
-                                   <span data-feather="map"></span>
-                                  <span>Live Maps</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#">
-                                  <span data-feather="calendar"></span>
-                                  <span>Calendar</span>
-                              </a>
-                          </li>
-                          <li>
-                              <a href="#">
+                              <a href="{{ url_for('dashboard.user_schedule')}}">
                                   <span data-feather="list"></span>
                                   <span>Schedule</span>
                               </a>
                           </li>
                           <li>
-                              <a href="#">
+                              <a href="{{ url_for('dashboard.documentation')}}">
                                  <span data-feather="book"></span>
                                   <span>Documentation</span>
                               </a>

@@ -43,11 +43,11 @@ td > .btn-outline-primary:hover{
   width: 60px;
 } 
 
-/*.feather {
+.feather {
   width: 16px;
   height: 16px;
   vertical-align: text-bottom;
-}*/
+}
 
 .ico_help {
   margin: 5px 0px 10px 5px;
@@ -218,12 +218,6 @@ td > .btn-outline-primary:hover{
 
 
 /*Top Performers */
-.user-name a{
-  color: #fff;
-  font-size: 1.35em;
-}
-
-
 /*
  * Navbar
  */
@@ -269,7 +263,7 @@ td > .btn-outline-primary:hover{
 
 /*NOTIFICATIONS*/
 
-.featherIcon {
+.notification > .featherIcon {
   width: 2.3em;
   height: 2.3em;
   stroke-width: 2;

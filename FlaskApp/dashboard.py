@@ -10,6 +10,7 @@ bp = Blueprint('dashboard', __name__)
 
 # the dashboard will display all available jobs from the jobs database
 
+
 @bp.route('/')
 def index():
     db = get_db()
@@ -25,32 +26,30 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
 
-
-
-    ##############################################################################################################################################
-    # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT! 
+    ##########################################################################
+    # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT!
     #
     # ALSO - need to do 'init-db' each time, else same set of notifications will get added to the table everytime the page is refreshed
-    ##############################################################################################################################################
+    ##########################################################################
 
-    #EMPLOYEES
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('employee', 'New Delivery Job Posted! ','info','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('employee', 'Reminder: Delivery Job # is scheduled for today.','alert','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('employee', 'You have not scheduled any jobs for this week.','warning','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('employee', 'Job # was successfully added to your schedule.','success','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('employee', 'Scheduled Job # was cancelled!','alert','2018-01-01 00:00:00'))
+    # EMPLOYEES
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+               ('employee', 'New Delivery Job Posted! ', 'info', '2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+               ('employee', 'Reminder: Delivery Job # is scheduled for today.', 'alert', '2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+               ('employee', 'You have not scheduled any jobs for this week.', 'warning', '2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+               ('employee', 'Job # was successfully added to your schedule.', 'success', '2018-01-01 00:00:00'))
+    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+               ('employee', 'Scheduled Job # was cancelled!', 'alert', '2018-01-01 00:00:00'))
 
     db.commit()
-
 
     notifications = db.execute('SELECT * FROM Notification n').fetchall()
 
     return render_template('dashboard/index.html', jobs=jobs, notifications=notifications)
+
 
 @bp.route("/manager_dashboard")
 def manager_dashboard():
@@ -61,25 +60,24 @@ def manager_dashboard():
         ' ORDER BY created DESC'
     ).fetchall()
 
-
-    ##############################################################################################################################################
-    # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT! 
+    ##########################################################################
+    # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT!
     #
     # ALSO - need to do 'init-db' each time, else same set of notifications will get added to the table everytime the page is refreshed
-    ##############################################################################################################################################
-
+    ##########################################################################
+    addNotifications = True
     # MANAGERS
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('manager', 'Joe David accepted Delivery Job #.','info','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('manager', '2 Jobs scheduled for today are without employees.','alert','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('manager', '3 Jobs for tomorrow are without employees.','warning','2018-01-01 00:00:00'))
-    db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',\
-                ('manager', 'All scheduled jobs for today were successfully assigned.','success','2018-01-01 00:00:00'))
-
-    db.commit()
-
+    if addNotifications:
+        db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+                   ('manager', 'Joe David accepted Delivery Job #.', 'info', '2018-01-01 00:00:00'))
+        db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+                   ('manager', '2 Jobs scheduled for today are without employees.', 'alert', '2018-01-01 00:00:00'))
+        db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+                   ('manager', '3 Jobs for tomorrow are without employees.', 'warning', '2018-01-01 00:00:00'))
+        db.execute('INSERT INTO Notification (type, message, priority, created ) VALUES (?, ?, ? , ?)',
+                   ('manager', 'All scheduled jobs for today were successfully assigned.', 'success', '2018-01-01 00:00:00'))
+        db.commit()
+        addNotifications = False
 
     notifications = db.execute('SELECT * FROM Notification n').fetchall()
 
@@ -92,10 +90,25 @@ def manager_dashboard():
 def user_profile():
     return render_template('dashboard/profile.html')
 
+
+@bp.route('/available_jobs')
+@login_required
+def available_jobs():
+
+    db = get_db()
+    jobs = db.execute(
+        'SELECT * FROM Job j'
+        ' ORDER BY created DESC'
+    ).fetchall()
+
+    return render_template('dashboard/available_jobs.html', jobs=jobs)
+
+
 @bp.route('/employee_schedule')
 @login_required
 def user_schedule():
     return render_template('dashboard/employee_schedule.html')
+
 
 def get_template(id):
     template = get_db().execute(
@@ -109,14 +122,19 @@ def get_template(id):
     return template
 
 
+@bp.route('/faq')
+def documentation():
+    return render_template('dashboard/faq.html')
+
+
 @bp.route('/create', methods=('GET', 'POST'))
 # @bp.route('/<int:id>/create', methods=('GET', 'POST'))
 @login_required
 def create(id=None):
 
     db = get_db()
-    templates = db.execute( 'SELECT * FROM Templates T').fetchall()
-    
+    templates = db.execute('SELECT * FROM Templates T').fetchall()
+
     if request.method == 'POST':
         title = request.form['job_title']
         body = request.form['job_desc']
@@ -150,17 +168,19 @@ def create(id=None):
             db.execute(
                 'INSERT INTO Job (job_title, job_desc, job_credentials, job_date_beg, job_date_end, job_time_beg, job_time_end, job_city, job_state, job_zip, m_id)'
                 ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (title, body, qualifications, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1)
+                (title, body, qualifications, begin_date, end_date,
+                 begin_time, end_time, job_city, job_state, job_zip, 1)
             )
-            print(title, body, qualifications, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1)
+            print(title, body, qualifications, begin_date, end_date,
+                  begin_time, end_time, job_city, job_state, job_zip, 1)
             db.commit()
-            
+
             return redirect(url_for('dashboard.manager_dashboard'))
 
     return render_template('dashboard/create.html', templates=templates)
 
 
-####################################################################################
+##########################################################################
 @bp.route('/profile', methods=('GET', 'POST'))
 @login_required
 def profile():
@@ -168,7 +188,7 @@ def profile():
         # return redirect(url_for('dashboard.index'))
 
     return render_template('dashboard/profile.html')
-####################################################################################
+##########################################################################
 
 
 def get_job(id, check_author=True):
@@ -195,7 +215,6 @@ def update(id):
     print(job['job_id'])
     print(job['job_desc'])
     print(job['job_credentials'])
-
 
     if request.method == 'POST':
         title = request.form['job_title']
@@ -229,7 +248,8 @@ def update(id):
             db.execute(
                 'UPDATE Job SET job_title = ?, job_desc = ?, job_credentials = ?, job_date_beg = ?, job_date_end = ?, job_time_beg = ?, job_time_beg = ?, job_city = ?, job_state = ?, job_zip = ?, m_id = ?'
                 ' WHERE job_id = ?',
-                (title, body, qualifications, begin_date, end_date, begin_time, end_time, job_city, job_state, job_zip, 1, id)
+                (title, body, qualifications, begin_date, end_date,
+                 begin_time, end_time, job_city, job_state, job_zip, 1, id)
             )
             db.commit()
             return redirect(url_for('dashboard.manager_dashboard'))
