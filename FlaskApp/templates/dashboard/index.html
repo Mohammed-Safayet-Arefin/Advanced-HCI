@@ -347,7 +347,40 @@
                         <td>{{ job['created'].strftime('%Y-%m-%d') }}</td>
                         <td><button class="btn btn-sm btn-dark qualification-tags">{{job['job_credentials']}}</button></td>
                         <td>{{ job['job_extra'] }}</td>
-                        <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button></td>
+                        <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" data-toggle="modal" data-target="#exampleModal">Claim</button>
+
+                            <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ job['job_title'] }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <!-- <p><strong>Job Title</strong>: CourierDelivery #3419</p> -->
+                                        <p><strong>Duration</strong>: 3hrs</p>
+                                        <p><strong>Date:</strong> Nov. 06, 2018 9:00AM - 12:00PM</p>
+                                        <p><strong>Location</strong>:{{ job['job_city'] }}</p>
+                                        <p><strong>Job Description</strong>: {{ job['job_desc']}}</p>
+                                        <p><strong>Qualification Requirements</strong><br>
+                                        <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
+                                        <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
+
+                                        <div id="map_placeholder"><img src="{{ url_for('static', filename='images/map_placeholder.jpg') }}"></div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                                      <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" onclick="return confirm('Are you sure you want to claim this job');">
+                                       Claim Job
+                                     </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                        </td> <!-- End Modal Template-->
                         
                       </tr>
                     {% endfor %}
@@ -371,6 +404,7 @@
                           <div id="collapse1" class="panel-collapse collapse">
                             <div class="panel-body">
                               <div class="row">
+
                               <div class="col-lg-4 panel-data">
                                   <p><strong>Job ID</strong>: 1000</p>
                                   <p><strong>Job Title</strong>: Delivery #3419</p>
@@ -380,51 +414,51 @@
                                     <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
                                     </p>
                                   <button type="button" class="btn btn-sm btn-info claim-btn" data-toggle="modal" data-target="#exampleModal">Claim</button>
-                                  </div>
+                              </div>
 
                               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><p>Courier Delivery #3419</p></h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                        
-                                    <!-- <p><strong>Job Title</strong>: CourierDelivery #3419</p> -->
-                                    <p><strong>Duration</strong>: 3hrs</p>
-                                    <p><strong>Date:</strong> Nov. 06, 2018 9:00AM - 12:00PM</p>
-                                    <p><strong>Location</strong>: Starkville, MS to Jackson, MS</p>
-                                    <p><strong>Job Description</strong>: Deliver Packages from Starkville, MS to Jackson, MS. Estimated Time is 3hrs.</p>
-                                    <p><strong>Qualification Requirements</strong><br>
-                                    <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
-                                    <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel"><p>Courier Delivery #3419</p></h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                          
+                                      <!-- <p><strong>Job Title</strong>: CourierDelivery #3419</p> -->
+                                      <p><strong>Duration</strong>: 3hrs</p>
+                                      <p><strong>Date:</strong> Nov. 06, 2018 9:00AM - 12:00PM</p>
+                                      <p><strong>Location</strong>: Starkville, MS to Jackson, MS</p>
+                                      <p><strong>Job Description</strong>: Deliver Packages from Starkville, MS to Jackson, MS. Estimated Time is 3hrs.</p>
+                                      <p><strong>Qualification Requirements</strong><br>
+                                      <button class="btn btn-sm btn-dark qualification-tags">CDL License</button>
+                                      <button class="btn btn-sm btn-dark qualification-tags">Standard Emp</button>
 
-                                    <div id="map_placeholder"><img src="{{ url_for('static', filename='images/map_placeholder.jpg') }}"></div>
-                                  </div>
-                                  <div class="modal-footer">
+                                      <div id="map_placeholder"><img src="{{ url_for('static', filename='images/map_placeholder.jpg') }}"></div>
+                                    </div>
+                                    <div class="modal-footer">
 
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" onclick="return confirm('Are you sure you want to claim this job');">
-                                     Claim Job
-                                   </button>
-                                   
+                                      <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                                      <button type="button" class="btn btn-sm btn-outline-primary" data-dismiss="modal" onclick="return confirm('Are you sure you want to claim this job');">
+                                       Claim Job
+                                     </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>
 
                               <div class="col-lg-8">
                                 <div id="map"></div>
                               </div>
 
-                            </div>
+                           </div>
                             </div>
                           </div>
                         </div>
                       </div>
+
                       </td>
                     </tr>
 
