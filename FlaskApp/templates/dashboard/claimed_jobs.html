@@ -184,7 +184,14 @@
                         <td>{{ job['job_time_beg']}}</td>
                         <td>{{ job['job_time_end']}}</td>
                         <td><button class="btn btn-sm btn-dark qualification-tags">{{job['job_credentials']}}</button></td>
-                        <td> <button type="button" class="btn btn-sm btn-outline-primary edit-btn" onclick="return confirm('Are you sure you want to return job to jobs Queue? You will no longer be scheduled for this job.')">Return</button></td>
+                        <td> 
+
+                          <form action="{{ url_for('dashboard.unclaim', j_id=job['job_id'], e_id=session['u_id']) }}" method="post">
+                              <input class="btn btn-sm btn-outline-primary edit-btn"  type="submit" value="unclaim" onclick="return confirm('Are you sure you want to return job to jobs Queue? You will no longer be scheduled for this job.')">
+                          </form>
+                          <!-- <button type="button" class="btn btn-sm btn-outline-primary edit-btn" onclick="return confirm('Are you sure you want to return job to jobs Queue? You will no longer be scheduled for this job.')">Unclaim</button> -->
+
+                        </td>
                       </tr>
                     {% endfor %}
 

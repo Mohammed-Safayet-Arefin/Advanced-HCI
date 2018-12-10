@@ -20,7 +20,6 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
 
-
     ##########################################################################
     # NEED TO VERIFY IF THE INFORMATION ON THE NOTIFICATIONS IS CORRECT!
     #
@@ -109,11 +108,10 @@ def claimed_jobs(e_id):
         (e_id,)
     ).fetchone()
 
-    if user['claimed_jobs'] != None:
+    jobs = []
+    if user['claimed_jobs'] != None: 
         claimed_jobs = user['claimed_jobs'].split(',')
         print(claimed_jobs)
-
-        jobs = []
         for i in claimed_jobs:
             job = get_job(i)
             print(job['job_title'])
@@ -122,7 +120,6 @@ def claimed_jobs(e_id):
             print(jobs[0])
     else:
         jobs = []
-
 
     return render_template('dashboard/claimed_jobs.html', jobs=jobs)
 
@@ -286,6 +283,37 @@ def delete(id):
     return redirect(url_for('dashboard.index'))
 
 
+@bp.route('/<int:j_id><int:e_id>/unclaim', methods=('POST',))
+@login_required
+def unclaim(j_id, e_id):
+
+    print("UNCLAIM")
+
+    db = get_db()
+    user = db.execute(
+        'SELECT * FROM Employee E WHERE e_id = ?',
+        (e_id,)
+    ).fetchone()
+
+    print("Claimed Jobs:", user['claimed_jobs'])
+    claimed = user['claimed_jobs'].split(',')
+
+    print(claimed)
+
+    for c in claimed:
+        if str(j_id) == c: 
+            claimed.remove(str(j_id))
+
+    claimed = ",".join(claimed)
+
+    db.execute(
+        'UPDATE Employee SET claimed_jobs = ? WHERE e_id = ?',
+        (claimed, e_id))
+    db.commit()
+
+    return redirect(url_for('dashboard.claimed_jobs', e_id=e_id))
+
+
 @bp.route('/<int:j_id><int:e_id>/claim', methods=('POST',))
 @login_required
 def claim(j_id, e_id):
@@ -293,14 +321,13 @@ def claim(j_id, e_id):
     print("Job_id:", j_id)
     print("E_id:", e_id)
 
-    # # job = get_job(j_id)
     db = get_db()
     user = db.execute(
         'SELECT * FROM Employee E WHERE e_id = ?',
         (e_id,)
     ).fetchone()
 
-    print("Claimed Jobs:", user['claimed_jobs'] )
+    print("Claimed Jobs:", user['claimed_jobs'])
     claimed = user['claimed_jobs'] + "," + str(j_id)
 
     db.execute(
@@ -312,10 +339,4 @@ def claim(j_id, e_id):
     # db.execute('DELETE FROM job WHERE job_id = ?', (j_id,))
     # db.commit()
 
-
     return redirect(url_for('dashboard.index'))
-
-
-
-
-
